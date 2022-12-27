@@ -23,12 +23,10 @@ namespace Internship_7_EF_Dmail.Data.Context
             var userEntity = modelBuilder.Entity<User>();
 
             userEntity.Property(u => u.Email)
-                .IsRequired()
-                .HasMaxLength(64);
+                .IsRequired();
 
             userEntity.Property(u => u.Password)
-                .IsRequired()
-                .HasMaxLength(64);
+                .IsRequired();
 
             userEntity.Property(u => u.CreatedAt)
                 .IsRequired()
@@ -48,8 +46,7 @@ namespace Internship_7_EF_Dmail.Data.Context
             var mailEntity = modelBuilder.Entity<Mail>();
 
             mailEntity.Property(m => m.Title)
-                .IsRequired()
-                .HasMaxLength(64);
+                .IsRequired();
 
             mailEntity.Property(m => m.CreatedAt)
                 .IsRequired()
