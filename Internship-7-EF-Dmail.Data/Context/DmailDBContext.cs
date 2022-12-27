@@ -1,4 +1,5 @@
 ﻿using Internship_7_EF_Dmail.Data.Entities.Models;
+using Internship_7_EF_Dmail.Data.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -18,16 +19,64 @@ namespace Internship_7_EF_Dmail.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SpamFlag>()
-                .HasKey(sf => new { sf.UserId, sf.FlaggedUserId });
+            #region User configuration
+            var userEntity = modelBuilder.Entity<User>();
 
-            modelBuilder.Entity<SpamFlag>()
-                .HasOne(sf => sf.User)
+            userEntity.Property(u => u.Email)
+                .IsRequired()
+                .HasMaxLength(64);
+
+            userEntity.Property(u => u.Password)
+                .IsRequired()
+                .HasMaxLength(64);
+
+            userEntity.Property(u => u.CreatedAt)
+                .IsRequired()
+                .HasDefaultValueSql("timezone('utc', now())");
+
+            userEntity.Property(u => u.Status)
+                .IsRequired()
+                .HasDefaultValue(UserStatus.Active);
+
+            userEntity.Property(u => u.Rights)
+                .IsRequired()
+                .HasDefaultValue(UserRights.Standard);
+
+            #endregion
+
+            #region Mail configuration
+            var mailEntity = modelBuilder.Entity<Mail>();
+
+            mailEntity.Property(m => m.Title)
+                .IsRequired()
+                .HasMaxLength(64);
+
+            mailEntity.Property(m => m.CreatedAt)
+                .IsRequired()
+                .HasDefaultValueSql("timezone('utc', now())");
+
+            mailEntity.Property(m => m.Format)
+                .IsRequired();
+
+            #endregion
+
+            #region SpamFlag configuration
+            var spamFlagEntity = modelBuilder.Entity<SpamFlag>();
+
+            spamFlagEntity.HasKey(sf => new { sf.UserId, sf.FlaggedUserId });
+
+            spamFlagEntity.HasOne(sf => sf.User)
                 .WithMany(u => u.Flagged)
                 .HasForeignKey(sf => sf.UserId);
 
-            modelBuilder.Entity<Recipient>()
-                .HasKey(r => new { r.MailId, r.UserId });
+            #endregion
+
+            #region Recipient configuration
+            var recipientEntity = modelBuilder.Entity<Recipient>();
+            
+            recipientEntity.HasKey(r => new { r.MailId, r.UserId });
+
+            #endregion
 
             base.OnModelCreating(modelBuilder);
         }
