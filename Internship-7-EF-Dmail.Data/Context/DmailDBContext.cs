@@ -1,5 +1,6 @@
 ﻿using Internship_7_EF_Dmail.Data.Entities.Models;
 using Internship_7_EF_Dmail.Data.Enums;
+using Internship_7_EF_Dmail.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -74,6 +75,8 @@ namespace Internship_7_EF_Dmail.Data.Context
             recipientEntity.HasKey(r => new { r.MailId, r.UserId });
 
             #endregion
+
+            DMailSeeder.Seed(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
