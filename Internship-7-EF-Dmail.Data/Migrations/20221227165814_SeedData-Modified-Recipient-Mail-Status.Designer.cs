@@ -3,6 +3,7 @@ using System;
 using Internship_7_EF_Dmail.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Internship_7_EF_Dmail.Data.Migrations
 {
     [DbContext(typeof(DmailDBContext))]
-    partial class DmailDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221227165814_SeedData-Modified-Recipient-Mail-Status")]
+    partial class SeedDataModifiedRecipientMailStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace Internship_7_EF_Dmail.Data.Migrations
                         {
                             Id = 1,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                            CreatedAt = new DateTime(2022, 12, 27, 16, 59, 38, 339, DateTimeKind.Utc).AddTicks(918),
+                            CreatedAt = new DateTime(2022, 12, 27, 16, 58, 13, 922, DateTimeKind.Utc).AddTicks(2236),
                             Format = 0,
                             SenderId = 1,
                             Title = "First sample mail"
@@ -73,9 +75,9 @@ namespace Internship_7_EF_Dmail.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 12, 27, 16, 59, 38, 339, DateTimeKind.Utc).AddTicks(920),
+                            CreatedAt = new DateTime(2022, 12, 27, 16, 58, 13, 922, DateTimeKind.Utc).AddTicks(2238),
                             EventDuration = new TimeSpan(0, 0, 1, 0, 0),
-                            EventStartAt = new DateTime(2022, 12, 27, 17, 0, 38, 339, DateTimeKind.Utc).AddTicks(920),
+                            EventStartAt = new DateTime(2022, 12, 27, 16, 59, 13, 922, DateTimeKind.Utc).AddTicks(2238),
                             Format = 1,
                             SenderId = 2,
                             Title = "Testing DMail"
@@ -119,13 +121,13 @@ namespace Internship_7_EF_Dmail.Data.Migrations
                         {
                             MailId = 2,
                             UserId = 1,
-                            EventStatus = 0
+                            EventStatus = 1
                         },
                         new
                         {
                             MailId = 2,
                             UserId = 3,
-                            EventStatus = 0
+                            EventStatus = 1
                         });
                 });
 
@@ -200,7 +202,7 @@ namespace Internship_7_EF_Dmail.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 12, 27, 16, 59, 38, 339, DateTimeKind.Utc).AddTicks(894),
+                            CreatedAt = new DateTime(2022, 12, 27, 16, 58, 13, 922, DateTimeKind.Utc).AddTicks(2210),
                             Email = "administrator@dmail.hr",
                             Password = "6372EA190AC157A4AFE6BD34B6D107A5B502785396C7A9C2A2FAC9E76DC5F676_87CA606D69D409AC3422D3ED1561ABD2_10000_SHA256",
                             Rights = 1,
@@ -209,7 +211,7 @@ namespace Internship_7_EF_Dmail.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 12, 27, 16, 59, 38, 339, DateTimeKind.Utc).AddTicks(897),
+                            CreatedAt = new DateTime(2022, 12, 27, 16, 58, 13, 922, DateTimeKind.Utc).AddTicks(2213),
                             Email = "user@dmail.hr",
                             Password = "FD570FB17E4042EEA75E9F9DC05C1E7B13807BFB5C156BA5C9181C49D8DC39D8_2EAF520C6EF88385B9B1BEB7E9D9170C_10000_SHA256",
                             Rights = 0,
@@ -218,7 +220,7 @@ namespace Internship_7_EF_Dmail.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 12, 27, 16, 59, 38, 339, DateTimeKind.Utc).AddTicks(898),
+                            CreatedAt = new DateTime(2022, 12, 27, 16, 58, 13, 922, DateTimeKind.Utc).AddTicks(2214),
                             Email = "dario@dmail.hr",
                             Password = "9AE1940F019AB31BA6BFD29F59EA05EBAEC5DBBE99DE041FB65A6354AC2A110B_0B5843ABC5E5C10F493916C0790CC01A_10000_SHA256",
                             Rights = 0,

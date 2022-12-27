@@ -83,11 +83,13 @@ namespace Internship_7_EF_Dmail.Data.Seeds
                     {
                         MailId = 2,
                         UserId = 1,
+                        EventStatus = Enums.EventStatus.NoResponse,
                     },
                     new Recipient()
                     {
                         MailId = 2,
                         UserId = 3,
+                        EventStatus = Enums.EventStatus.NoResponse,
                     },
                 });
 

@@ -2,8 +2,8 @@
 {
     public enum EventStatus
     {
-        Rejected,
         NoResponse,
+        Rejected,
         Accepted
     }
 }
