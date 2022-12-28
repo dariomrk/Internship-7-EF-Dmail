@@ -1,4 +1,4 @@
-﻿namespace Internship_7_EF_Dmail.Data.Entities.Models
+﻿namespace Internship_7_EF_Dmail.Data.Models
 {
     public class SpamFlag
     {

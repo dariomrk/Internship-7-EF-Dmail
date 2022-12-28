@@ -1,4 +1,4 @@
-﻿using Internship_7_EF_Dmail.Data.Entities.Models;
+﻿using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Data.Enums;
 using Internship_7_EF_Dmail.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
