@@ -3,6 +3,7 @@
     public enum Response
     {
         Succeeded,
+        NoChanges,
         ErrorNotFound,
         ErrorViolatesUniqueConstraint,
     }
