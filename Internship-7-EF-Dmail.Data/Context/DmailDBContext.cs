@@ -26,6 +26,9 @@ namespace Internship_7_EF_Dmail.Data.Context
             userEntity.Property(u => u.Email)
                 .IsRequired();
 
+            userEntity.HasIndex(u => u.Email)
+                .IsUnique();
+
             userEntity.Property(u => u.Password)
                 .IsRequired();
 
