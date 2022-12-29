@@ -6,5 +6,7 @@
         NoChanges,
         ErrorNotFound,
         ErrorViolatesUniqueConstraint,
+        ErrorViolatesRequirements,
+        ErrorInvalidFormat,
     }
 }

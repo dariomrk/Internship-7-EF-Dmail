@@ -1,10 +1,12 @@
 ﻿using Internship_7_EF_Dmail.Data.Context;
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
+using Internship_7_EF_Dmail.Domain.Repos.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Internship_7_EF_Dmail.Domain.Repos
 {
-    public class UserRepo : BaseRepo
+    public class UserRepo : BaseRepo, IRepository<User>
     {
         public UserRepo(DmailDBContext context) : base(context)
         {
@@ -14,8 +16,20 @@ namespace Internship_7_EF_Dmail.Domain.Repos
 
         public ICollection<User> GetAll() => context.Users.ToList();
 
+        public ICollection<User> GetFlaggedUsers(int userId) => context.SpamFlags
+                .Where(sf => sf.UserId == userId)
+                .Join(context.Users,
+                sf => sf.FlaggedUserId,
+                u => u.Id,
+                (sf, u) => new { sf, u })
+                .Select(a => a.u)
+                .ToList();
+
         public Response Add(User user)
         {
+            if (!Regex.IsMatch(user.Email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
+                return Response.ErrorViolatesRequirements;
+
             if (GetAll().Any(u => u.Email.ToLower() == user.Email.ToLower()))
                 return Response.ErrorViolatesUniqueConstraint;
 
@@ -23,15 +37,9 @@ namespace Internship_7_EF_Dmail.Domain.Repos
             return SaveChanges();
         }
 
-        public Response Delete(int userId)
+        public Response Update(User user)
         {
-            User? toDelete = GetById(userId);
-
-            if (toDelete == null)
-                return Response.ErrorNotFound;
-
-            context.Users.Remove(toDelete);
-            return SaveChanges();
+            throw new NotSupportedException("Use specific update method (UpdateEmail, UpdatePassword...).");
         }
 
         public Response UpdateEmail(int userId, string email)
@@ -40,6 +48,8 @@ namespace Internship_7_EF_Dmail.Domain.Repos
 
             if (toUpdate == null)
                 return Response.ErrorNotFound;
+            if (!Regex.IsMatch(email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
+                return Response.ErrorViolatesRequirements;
 
             if (GetAll().Any(u => u.Email.ToLower() == email.ToLower()))
                 return Response.ErrorViolatesUniqueConstraint;
@@ -82,6 +92,17 @@ namespace Internship_7_EF_Dmail.Domain.Repos
 
             toUpdate.Rights = rights;
 
+            return SaveChanges();
+        }
+
+        public Response Delete(int userId)
+        {
+            User? toDelete = GetById(userId);
+
+            if (toDelete == null)
+                return Response.ErrorNotFound;
+
+            context.Users.Remove(toDelete);
             return SaveChanges();
         }
     }

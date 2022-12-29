@@ -6,7 +6,7 @@ namespace Internship_7_EF_Dmail.Domain.Cryptography
     {
         private const byte _saltSize = 16;
         private const byte _keySize = 32;
-        private const ushort _iterations = 10000;
+        private const int _iterations = 100000;
         private static readonly HashAlgorithmName _algorithm = HashAlgorithmName.SHA256;
 
         public static string Hash(string input)
