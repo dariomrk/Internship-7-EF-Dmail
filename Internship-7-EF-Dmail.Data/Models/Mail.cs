@@ -5,7 +5,7 @@ namespace Internship_7_EF_Dmail.Data.Models
     public class Mail
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public MailFormat Format { get; set; }
         public string? Content { get; set; }
@@ -13,8 +13,8 @@ namespace Internship_7_EF_Dmail.Data.Models
         public TimeSpan? EventDuration { get; set; }
 
         public int SenderId { get; set; }
-        public User Sender { get; set; }
+        public User Sender { get; set; } = null!;
 
-        public List<Recipient> Recipients { get; set; }
+        public ICollection<Recipient> Recipients { get; set; } = new List<Recipient>();
     }
 }

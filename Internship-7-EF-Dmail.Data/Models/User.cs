@@ -5,16 +5,16 @@ namespace Internship_7_EF_Dmail.Data.Models
     public class User
     {
         public int Id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Email { get; set; } = null!;
+        public string Password { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public UserStatus Status { get; set; }
         public UserRights Rights { get; set; }
 
-        public List<Mail> Sent { get; set; }
+        public ICollection<Mail> Sent { get; set; } = new List<Mail>();
 
-        public List<SpamFlag> Flagged { get; set; }
+        public ICollection<SpamFlag> Flagged { get; set; } = new List<SpamFlag>();
 
-        public List<Recipient> Recieved { get; set; }
+        public ICollection<Recipient> Recieved { get; set; } = new List<Recipient>();
     }
 }
