@@ -18,6 +18,13 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
         public bool EmailExists(string email) => GetAll().Any(u => u.Email.ToLower() == email.ToLower());
 
+        public Response ValidateEmail(string email)
+        {
+            if (!Regex.IsMatch(email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
+                return Response.ErrorInvalidFormat;
+            return Response.Succeeded;
+        }
+
         public ICollection<User> GetAll() => context.Users.ToList();
 
         public ICollection<User> GetFlaggedUsers(int userId) => context.SpamFlags
@@ -31,7 +38,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
         public Response Add(User user)
         {
-            if (!Regex.IsMatch(user.Email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
+            if (ValidateEmail(user.Email) != Response.Succeeded)
                 return Response.ErrorViolatesRequirements;
 
             if (EmailExists(user.Email))
@@ -52,7 +59,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
             if (toUpdate == null)
                 return Response.ErrorNotFound;
-            if (!Regex.IsMatch(email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
+            if (ValidateEmail(email) != Response.Succeeded)
                 return Response.ErrorViolatesRequirements;
 
             if (EmailExists(email))
