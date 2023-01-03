@@ -19,4 +19,15 @@
     <ProjectReference Include="..\Internship-7-EF-Dmail.Domain\Internship-7-EF-Dmail.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Actions\Inbox\" />
+    <Folder Include="Actions\NewEvent\" />
+    <Folder Include="Actions\Logout\" />
+    <Folder Include="Actions\Administration\" />
+    <Folder Include="Actions\ProfileSettings\" />
+    <Folder Include="Actions\NewMail\" />
+    <Folder Include="Actions\Spam\" />
+    <Folder Include="Actions\Outbox\" />
+  </ItemGroup>
+
 </Project>
