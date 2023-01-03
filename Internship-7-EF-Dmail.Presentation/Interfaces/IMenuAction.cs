@@ -2,6 +2,6 @@
 {
     public interface IMenuAction : IAction
     {
-        IList<IAction> AllActions { get; set; }
+        IList<IAction> AllActions { get; }
     }
 }

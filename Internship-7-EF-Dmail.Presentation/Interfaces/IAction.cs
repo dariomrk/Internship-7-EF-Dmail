@@ -3,7 +3,7 @@
     public interface IAction
     {
         public int Index { get; set; }
-        public string Name { get; set; }
-        public void Action();
+        public string Name { get; }
+        public void Open();
     }
 }
