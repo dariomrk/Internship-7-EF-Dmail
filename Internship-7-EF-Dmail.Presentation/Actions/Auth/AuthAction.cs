@@ -3,11 +3,32 @@ using Internship_7_EF_Dmail.Domain.Enums;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 using static Internship_7_EF_Dmail.Presentation.Utils.Input;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
+using Internship_7_EF_Dmail.Data.Models;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
 {
     public class AuthAction : BaseMenuAction
     {
+        private static User? _loggedInAs;
+
+        public static void ClearLogin()
+        {
+            _loggedInAs = null;
+        }
+        public static User? GetCurrentLogin()
+        {
+            if(_loggedInAs == null)
+                return null;
+            return new User
+            {
+                Id = _loggedInAs.Id,
+                Email = _loggedInAs.Email,
+                CreatedAt = _loggedInAs.CreatedAt,
+                Status = _loggedInAs.Status,
+                Rights = _loggedInAs.Rights,
+            };
+        }
+
         private readonly UserRepository _userRepository;
         private readonly AuthRepository _authRepository;
 
@@ -61,6 +82,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
 
             WriteLine($"Authenticated as {email}.", Style.Success);
             WaitForInput();
+
+            _loggedInAs = _userRepository.GetByEmail(email);
 
             base.Open();
         }

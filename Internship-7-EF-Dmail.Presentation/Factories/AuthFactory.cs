@@ -2,6 +2,7 @@
 using Internship_7_EF_Dmail.Domain.Factories;
 using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
+using Internship_7_EF_Dmail.Presentation.Actions.Register;
 
 namespace Internship_7_EF_Dmail.Presentation.Factories
 {
@@ -15,7 +16,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
                 RepositoryFactory.Create<AuthRepository>(),
                 new List<IAction>()
                 {
-
+                    new LogoutAction(),
                 }
                 );
         }

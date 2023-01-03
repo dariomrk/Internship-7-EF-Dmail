@@ -1,15 +1,11 @@
-﻿using Internship_7_EF_Dmail.Presentation.Interfaces;
+﻿using Internship_7_EF_Dmail.Presentation.Actions;
+using Internship_7_EF_Dmail.Presentation.Interfaces;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 
 namespace Internship_7_EF_Dmail.Presentation.Extensions
 {
     public static class ActionExtensions
     {
-        #region Error message constants
-        private const string PARSE_ERROR_MSG = "Cannot parse input. Please input an integer.";
-        private const string OUT_OF_RANGE_ERROR_MSG = "Option does not exist. Please input a valid option.";
-        #endregion
-
         public static void SetIndexes(this IList<IAction> actions)
         {
             actions.ForEach((action,index) => action.Index = index);
@@ -30,7 +26,7 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
 
                 if (!int.TryParse(Console.ReadLine(), out int userInput))
                 {
-                    WriteLine(PARSE_ERROR_MSG, Style.Error);
+                    WriteLine("Cannot parse input. Please input an integer.", Style.Error);
                     WaitForInput();
                     continue;
                 }
@@ -39,12 +35,12 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
 
                 if (selectedAction == null)
                 {
-                    WriteLine(OUT_OF_RANGE_ERROR_MSG, Style.Error);
+                    WriteLine("Option does not exist. Please input a valid option.", Style.Error);
                     WaitForInput();
                     continue;
                 }
 
-                if (selectedAction is Actions.ExitMenuAction)
+                if (selectedAction is ReturnAction)
                     return;
 
                 selectedAction.Open();

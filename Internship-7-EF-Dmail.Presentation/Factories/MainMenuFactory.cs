@@ -6,11 +6,11 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
 {
     public static class MainMenuFactory
     {
-        public static IList<Interfaces.IAction> CreateActions()
+        public static IList<IAction> CreateActions()
         {
             var actions = new List<IAction>()
             {
-                new ExitMenuAction(),
+                new ExitApplicationAction(),
                 AuthFactory.Create(),
                 RegisterFactory.Create(),
             };
