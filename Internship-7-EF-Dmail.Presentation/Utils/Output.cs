@@ -1,6 +1,6 @@
 ﻿namespace Internship_7_EF_Dmail.Presentation.Utils
 {
-    public static class AdvancedOutput
+    public static class Output
     {
         public enum Style
         {
@@ -17,7 +17,7 @@
             public string PrependMessage { get; init; }
         }
 
-        private static StyleSettings GetStyleSettings(Style style)
+        public static StyleSettings GetStyleSettings(Style style)
         {
             return style switch
             {
@@ -67,6 +67,12 @@
             Console.BackgroundColor = style.Background;
             Console.WriteLine(style.PrependMessage + message);
             Console.ResetColor();
+        }
+
+        public static void WaitForInput()
+        {
+            WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }
