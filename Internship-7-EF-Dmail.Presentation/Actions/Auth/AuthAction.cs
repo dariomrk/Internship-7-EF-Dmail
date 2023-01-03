@@ -52,6 +52,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
                 return;
             }
 
+            if(!_userRepository.IsActive(email))
+            {
+                WriteLine("Account is disabled.", Style.Error);
+                WaitForInput();
+                return;
+            }
+
+            WriteLine($"Authenticated as {email}.", Style.Success);
+            WaitForInput();
+
             base.Open();
         }
     }

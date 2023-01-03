@@ -76,12 +76,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Register
 
             if(result != Response.Succeeded)
             {
-                WriteLine("An unhandled exception occured. Error message: " + result, Style.Error);
+                WriteLine("An unhandled exception occured. Error message: " + result + ".", Style.Error);
                 WaitForInput();
                 return;
             }
 
-            WriteLine($"Added {newUser.Email.ToLower()}", Style.Success);
+            WriteLine($"Added {newUser.Email.ToLower()}.", Style.Success);
             WaitForInput();
             return;
         }
