@@ -6,7 +6,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions
     public class BaseMenuAction : IMenuAction
     {
         public int Index { get; set; }
-        public string Name { get; } = "BaseMenuAction";
+        public string Name { get; init; } = "BaseMenuAction";
         public IList<IAction> AllActions { get; }
 
         public BaseMenuAction(IList<IAction> actions)
@@ -15,7 +15,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions
             AllActions = actions;
         }
 
-        public void Open()
+        public virtual void Open()
         {
             AllActions.WriteActionsAndOpen();
         }

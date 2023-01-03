@@ -24,6 +24,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     break;
                 password += key.KeyChar;
             }
+            Console.WriteLine();
             return password;
         }
     }
