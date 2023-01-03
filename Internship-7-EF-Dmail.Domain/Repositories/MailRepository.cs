@@ -1,13 +1,13 @@
 ﻿using Internship_7_EF_Dmail.Data.Context;
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
-using Internship_7_EF_Dmail.Domain.Repos.Interfaces;
+using Internship_7_EF_Dmail.Domain.Repositories.Interfaces;
 
-namespace Internship_7_EF_Dmail.Domain.Repos
+namespace Internship_7_EF_Dmail.Domain.Repositories
 {
-    public class MailRepo : BaseRepo, IRepository<Mail>
+    public class MailRepository : BaseRepository, IRepository<Mail>
     {
-        public MailRepo(DmailDBContext context) : base(context)
+        public MailRepository(DmailDBContext context) : base(context)
         {
         }
 
@@ -68,7 +68,7 @@ namespace Internship_7_EF_Dmail.Domain.Repos
         {
             Mail? toChange = GetWhereReciever(userId).FirstOrDefault(m => m.Id == mailId);
 
-            if(toChange == null)
+            if (toChange == null)
                 return Response.ErrorNotFound;
 
             Recipient recipient = context.Recipients.Find(mailId, userId)!;

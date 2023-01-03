@@ -1,14 +1,14 @@
 ﻿using Internship_7_EF_Dmail.Data.Context;
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
-using Internship_7_EF_Dmail.Domain.Repos.Interfaces;
+using Internship_7_EF_Dmail.Domain.Repositories.Interfaces;
 using System.Text.RegularExpressions;
 
-namespace Internship_7_EF_Dmail.Domain.Repos
+namespace Internship_7_EF_Dmail.Domain.Repositories
 {
-    public class UserRepo : BaseRepo, IRepository<User>
+    public class UserRepository : BaseRepository, IRepository<User>
     {
-        public UserRepo(DmailDBContext context) : base(context)
+        public UserRepository(DmailDBContext context) : base(context)
         {
         }
 

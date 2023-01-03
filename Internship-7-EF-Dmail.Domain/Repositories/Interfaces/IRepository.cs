@@ -1,6 +1,6 @@
 ﻿using Internship_7_EF_Dmail.Domain.Enums;
 
-namespace Internship_7_EF_Dmail.Domain.Repos.Interfaces
+namespace Internship_7_EF_Dmail.Domain.Repositories.Interfaces
 {
     /// <summary>
     /// Defines a simple CRUD interface.<br/>
