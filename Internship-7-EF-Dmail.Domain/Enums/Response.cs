@@ -8,5 +8,6 @@
         ErrorViolatesUniqueConstraint,
         ErrorViolatesRequirements,
         ErrorInvalidFormat,
+        ErrorInvalidPassword,
     }
 }

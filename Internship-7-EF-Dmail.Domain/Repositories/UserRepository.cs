@@ -14,6 +14,10 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
         public User? GetById(int id) => context.Users.Find(id);
 
+        public User? GetByEmail(string email) => GetAll().FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+
+        public bool EmailExists(string email) => GetAll().Any(u => u.Email.ToLower() == email.ToLower());
+
         public ICollection<User> GetAll() => context.Users.ToList();
 
         public ICollection<User> GetFlaggedUsers(int userId) => context.SpamFlags
@@ -30,7 +34,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             if (!Regex.IsMatch(user.Email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
                 return Response.ErrorViolatesRequirements;
 
-            if (GetAll().Any(u => u.Email.ToLower() == user.Email.ToLower()))
+            if (EmailExists(user.Email))
                 return Response.ErrorViolatesUniqueConstraint;
 
             context.Users.Add(user);
@@ -51,7 +55,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             if (!Regex.IsMatch(email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
                 return Response.ErrorViolatesRequirements;
 
-            if (GetAll().Any(u => u.Email.ToLower() == email.ToLower()))
+            if (EmailExists(email))
                 return Response.ErrorViolatesUniqueConstraint;
 
             toUpdate.Email = email;
