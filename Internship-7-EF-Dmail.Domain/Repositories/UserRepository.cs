@@ -119,5 +119,17 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             context.Users.Remove(toDelete);
             return SaveChanges();
         }
+
+        public bool IsActive(string email)
+        {
+            User? toCheck = GetByEmail(email);
+
+            if(toCheck == null)
+                return false;
+
+            if (toCheck.Status == Data.Enums.UserStatus.Active)
+                return true;
+            return false;
+        }
     }
 }
