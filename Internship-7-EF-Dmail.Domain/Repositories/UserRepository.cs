@@ -1,5 +1,6 @@
 ﻿using Internship_7_EF_Dmail.Data.Context;
 using Internship_7_EF_Dmail.Data.Models;
+using Internship_7_EF_Dmail.Domain.Cryptography;
 using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Domain.Repositories.Interfaces;
 using System.Text.RegularExpressions;
@@ -43,6 +44,8 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
             if (EmailExists(user.Email))
                 return Response.ErrorViolatesUniqueConstraint;
+
+            user.Password = Password.Hash(user.Password);
 
             context.Users.Add(user);
             return SaveChanges();

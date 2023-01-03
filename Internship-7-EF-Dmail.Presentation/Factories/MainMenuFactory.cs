@@ -12,6 +12,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
             {
                 new ExitMenuAction(),
                 AuthFactory.Create(),
+                RegisterFactory.Create(),
             };
             actions.SetIndexes();
             return actions;

@@ -15,7 +15,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
 
         public AuthAction(UserRepository userRepository, AuthRepository authRepository, IList<IAction> actions) : base(actions)
         {
-            Name = "Authentication";
+            Name = "Authenticate";
             _userRepository = userRepository;
             _authRepository = authRepository;
         }
@@ -23,6 +23,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
         public override void Open()
         {
             Console.Clear();
+            WriteLine(Name);
 
             if ((DateTime.UtcNow - _lastLogin) < TimeSpan.FromSeconds(30))
             {
@@ -43,7 +44,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
             }
 
             string password = ReadPassword("Input password: ");
-            if(_authRepository.Authenticate(email,password) == Response.ErrorInvalidPassword)
+            if (_authRepository.Authenticate(email, password) == Response.ErrorInvalidPassword)
             {
                 _lastLogin = DateTime.UtcNow;
                 WriteLine("Password is invalid.", Style.Error);
