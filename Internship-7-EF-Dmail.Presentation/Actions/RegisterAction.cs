@@ -5,7 +5,7 @@ using static Internship_7_EF_Dmail.Presentation.Utils.Input;
 using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Data.Models;
 
-namespace Internship_7_EF_Dmail.Presentation.Actions.Register
+namespace Internship_7_EF_Dmail.Presentation.Actions
 {
     public class RegisterAction : IAction
     {
@@ -32,7 +32,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Register
                 return;
             }
 
-            if(_userRepository.ValidateEmail(email) != Response.Succeeded)
+            if (_userRepository.ValidateEmail(email) != Response.Succeeded)
             {
                 WriteLine("Email format is invalid.", Style.Error);
                 WaitForInput();
@@ -40,11 +40,11 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Register
             }
 
             string password = ReadPassword("Input a new password: ");
-            
-            if(string.IsNullOrWhiteSpace(password))
+
+            if (string.IsNullOrWhiteSpace(password))
             {
                 WriteLine("An empty password is a significant safety risk!", Style.Warning);
-                if(!GetConfirmation("Are you sure you want to create an account with no password?"))
+                if (!GetConfirmation("Are you sure you want to create an account with no password?"))
                 {
                     WriteLine("Cancelled.", Style.Warning);
                     WaitForInput();
@@ -53,7 +53,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Register
 
             string confimPassword = ReadPassword("Confirm the previously inputted password: ");
 
-            if(password != confimPassword)
+            if (password != confimPassword)
             {
                 WriteLine("Passwords do not match! Cancelling user creation.", Style.Error);
                 WaitForInput();
@@ -74,7 +74,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Register
 
             Response result = _userRepository.Add(newUser);
 
-            if(result != Response.Succeeded)
+            if (result != Response.Succeeded)
             {
                 WriteLine("An unhandled exception occured. Error message: " + result + ".", Style.Error);
                 WaitForInput();

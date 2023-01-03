@@ -5,7 +5,7 @@ using static Internship_7_EF_Dmail.Presentation.Utils.Input;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 using Internship_7_EF_Dmail.Data.Models;
 
-namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
+namespace Internship_7_EF_Dmail.Presentation.Actions
 {
     public class AuthAction : BaseMenuAction
     {
@@ -17,7 +17,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
         }
         public static User? GetCurrentLogin()
         {
-            if(_loggedInAs == null)
+            if (_loggedInAs == null)
                 return null;
             return new User
             {
@@ -46,7 +46,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
             Console.Clear();
             WriteLine(Name);
 
-            if ((DateTime.UtcNow - _lastLogin) < TimeSpan.FromSeconds(30))
+            if (DateTime.UtcNow - _lastLogin < TimeSpan.FromSeconds(30))
             {
                 WriteLine($"You have been timed out. " +
                     $"Please wait {(TimeSpan.FromSeconds(30) - (DateTime.UtcNow - _lastLogin)).Seconds}s" +
@@ -57,7 +57,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
 
             string email = Read("Input email: ");
 
-            if(!_userRepository.EmailExists(email))
+            if (!_userRepository.EmailExists(email))
             {
                 WriteLine("Email does not exist.", Style.Error);
                 WaitForInput();
@@ -73,7 +73,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Auth
                 return;
             }
 
-            if(!_userRepository.IsActive(email))
+            if (!_userRepository.IsActive(email))
             {
                 WriteLine("Account is disabled.", Style.Error);
                 WaitForInput();

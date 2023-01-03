@@ -1,8 +1,7 @@
-﻿using Internship_7_EF_Dmail.Presentation.Actions.Auth;
-using Internship_7_EF_Dmail.Presentation.Extensions;
+﻿using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
-namespace Internship_7_EF_Dmail.Presentation.Actions.Register
+namespace Internship_7_EF_Dmail.Presentation.Actions
 {
     public class LogoutAction : IAction
     {
