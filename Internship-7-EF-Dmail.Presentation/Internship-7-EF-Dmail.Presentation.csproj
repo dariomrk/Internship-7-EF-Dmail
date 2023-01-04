@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Actions\Administration\" />
+    <Folder Include="Actions\Inbox\InboxActions\MailActions\OpenMailActions\" />
     <Folder Include="Actions\NewEvent\" />
     <Folder Include="Actions\NewMail\" />
     <Folder Include="Actions\Outbox\" />

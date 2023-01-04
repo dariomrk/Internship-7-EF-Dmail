@@ -11,7 +11,8 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
             return new InboxMenuAction(new List<IAction>()
             {
                 new ReturnAction(),
-                UnreadMailsActionFactory.Create(),
+                MailsActionFactory.Create(Data.Enums.MailStatus.Unread),
+                MailsActionFactory.Create(Data.Enums.MailStatus.Read),
             });
         }
     }

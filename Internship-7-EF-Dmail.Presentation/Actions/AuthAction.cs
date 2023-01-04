@@ -79,7 +79,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions
                 WaitForInput();
                 return;
             }
-
+            Console.Clear();
             WriteLine($"Authenticated as {email}.", Style.Success);
             WaitForInput();
 

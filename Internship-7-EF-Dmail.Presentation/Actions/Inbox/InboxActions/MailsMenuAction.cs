@@ -8,21 +8,29 @@ using static Internship_7_EF_Dmail.Presentation.Messages.Messages;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions
 {
-    public class UnreadMailsMenuAction : BaseMenuAction
+    public class MailsMenuAction : BaseMenuAction
     {
         private readonly MailRepository _mailRepository;
+        private readonly Data.Enums.MailStatus _status;
 
-        public UnreadMailsMenuAction(MailRepository mailRepository, IList<IAction> actions) : base(actions)
+        public MailsMenuAction(
+            MailRepository mailRepository,
+            Data.Enums.MailStatus status,
+            IList<IAction> actions) : base(actions)
         {
-            Name = "Unread mail";
+            Name = status == Data.Enums.MailStatus.Unread ? "Unread mails" : "Read mails";
             _mailRepository = mailRepository;
+            _status = status;
         }
 
         public override void Open()
         {
             Console.Clear();
 
-            IList<Mail> mails = _mailRepository.GetWhereReciever(AuthAction.GetCurrentLogin()!.Id)
+            IList<Mail> mails = _mailRepository.GetWhereRecieverAndStatus(
+                AuthAction.GetCurrentLogin()!.Id,
+                _status
+                )
                 .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 

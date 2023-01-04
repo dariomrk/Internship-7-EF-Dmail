@@ -1,4 +1,5 @@
-﻿using Internship_7_EF_Dmail.Data.Models;
+﻿using Internship_7_EF_Dmail.Data.Enums;
+using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 
 namespace Internship_7_EF_Dmail.Presentation.Utils
@@ -8,8 +9,10 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         public enum Style
         {
             Standard,
+            Accepted,
             Success,
             Warning,
+            Rejected,
             Error,
         }
 
@@ -36,11 +39,23 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     Background = ConsoleColor.DarkGreen,
                     PrependMessage = "Success: ",
                 },
+                Style.Accepted => new StyleSettings
+                {
+                    Foreground = ConsoleColor.White,
+                    Background = ConsoleColor.DarkGreen,
+                    PrependMessage = "",
+                },
                 Style.Warning => new StyleSettings
                 {
                     Foreground = ConsoleColor.Black,
                     Background = ConsoleColor.DarkYellow,
                     PrependMessage = "Warning: ",
+                },
+                Style.Rejected => new StyleSettings
+                {
+                    Foreground = ConsoleColor.White,
+                    Background = ConsoleColor.DarkRed,
+                    PrependMessage = "",
                 },
                 Style.Error => new StyleSettings
                 {
@@ -62,7 +77,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             Console.ResetColor();
         }
 
-        public static void WriteLine(string message, Style writeStyle = Style.Standard)
+        public static void WriteLine(string message = "", Style writeStyle = Style.Standard)
         {
             var style = GetStyleSettings(writeStyle);
 
@@ -74,15 +89,49 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static void WriteMails(IList<Mail> mails)
         {
-            IList<Mail> ordered = mails.ToList();
             WriteLine("Ord. |" +
                 " Title                    |" +
                 " Sender                ");
             if (!mails.Any())
                 return;
-            ordered.ForEach((m, i) => WriteLine($"{i}.   |" +
+            mails.ForEach((m, i) => WriteLine($"{i}.   |" +
                 $" {m.Title.Truncate(24).PadRight(24)} |" +
                 $" {m.Sender.Email.Truncate(24).PadRight(24)}"));
+        }
+
+        public static void WriteInvitedUsers(Mail mail)
+        {
+            WriteLine("Invited users:");
+            foreach (Recipient recipient in mail.Recipients)
+            {
+                Write($"\t{(recipient.User == null ? "My response" : recipient.User.Email)} : ");
+                if (recipient.EventStatus == EventStatus.NoResponse) WriteLine("No response");
+                else if (recipient.EventStatus == EventStatus.Accepted) WriteLine("Accepted", Style.Accepted);
+                else if (recipient.EventStatus == EventStatus.Rejected) WriteLine("Rejected", Style.Rejected);
+            }
+        }
+
+        public static void WriteMail(Mail mail)
+        {
+            Console.Clear();
+            if(mail.Format == MailFormat.Email)
+            {
+                WriteLine(
+                    $"Title:      {mail.Title}\n" +
+                    $"Created at: {mail.CreatedAt}\n" +
+                    $"Sender:     {mail.Sender.Email}\n" +
+                    $"Content:\n{mail.Content}");
+            }
+            else if(mail.Format == MailFormat.Event)
+            {
+                WriteLine(
+                    $"Title:            {mail.Title}\n" +
+                    $"Event start time: {mail.EventStartAt}\n" +
+                    $"Event duration:   {mail.EventDuration!.Value.ToString(@"hh\:mm\:ss")}\n" +
+                    $"Sender:           {mail.Sender.Email}");
+                WriteInvitedUsers(mail);
+            }
+            WriteLine();
         }
     }
 }
