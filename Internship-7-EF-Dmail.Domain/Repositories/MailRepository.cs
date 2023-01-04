@@ -130,9 +130,14 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
         public Response RemoveFromOutbox(int mailId)
         {
-            throw new NotImplementedException();
-            // TODO Implement feature
-            // - Add hidden property to Mail entity?
+            Mail? toHide = GetById(mailId);
+
+            if (toHide == null)
+                return Response.ErrorNotFound;
+
+            toHide.HiddenFromSender = true;
+
+            return SaveChanges();
         }
     }
 
