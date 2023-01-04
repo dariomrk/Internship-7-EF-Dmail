@@ -5,7 +5,7 @@ using Internship_7_EF_Dmail.Presentation.Actions;
 
 namespace Internship_7_EF_Dmail.Presentation.Factories
 {
-    public static class AuthActionsFactory
+    public static class AuthActionFactory
     {
         public static AuthAction Create()
         {
@@ -15,12 +15,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
                 new List<IAction>()
                 {
                     new LogoutAction(),
-                    InboxActionsFactory.Create(),
-                    // TODO Outbox
-                    // TODO Spam
-                    // TODO NewMail
-                    // TODO NewEvent
-                    // TODO ProfileSettings
+                    InboxActionFactory.Create(),
                 }
                 );
         }

@@ -17,11 +17,13 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
             actions.ForEach((action) => WriteLine($"{action.Index} - {action.Name}"));
         }
 
-        public static void WriteActionsAndOpen(this IList<IAction> actions)
+        public static void WriteActionsAndOpen(this IList<IAction> actions, bool clear = true)
         {
             while (true)
             {
-                Console.Clear();
+                if(clear)
+                    Console.Clear();
+
                 actions.WriteActions();
                 Write("Select one of the provided options: ");
 

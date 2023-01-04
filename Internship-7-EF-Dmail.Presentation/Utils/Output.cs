@@ -72,12 +72,14 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             Console.ResetColor();
         }
 
-        public static void WriteMailsAscending(IList<Mail> mails)
+        public static void WriteMails(IList<Mail> mails)
         {
-            IList<Mail> ordered = mails.OrderBy(m => m.CreatedAt).ToList();
+            IList<Mail> ordered = mails.ToList();
             WriteLine("Ord. |" +
                 " Title                    |" +
                 " Sender                ");
+            if (!mails.Any())
+                return;
             ordered.ForEach((m, i) => WriteLine($"{i}.   |" +
                 $" {m.Title.Truncate(24).PadRight(24)} |" +
                 $" {m.Sender.Email.Truncate(24).PadRight(24)}"));

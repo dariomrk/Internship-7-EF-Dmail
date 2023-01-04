@@ -6,7 +6,7 @@ namespace Internship_7_EF_Dmail.Presentation
 {
     public class DmailApp
     {
-        public static IList<IAction> MainMenuActions = MainMenuFactory.CreateActions();
+        public static IList<IAction> MainMenuActions = MainMenuActionFactory.CreateActions();
 
         public static void Main()
         {
