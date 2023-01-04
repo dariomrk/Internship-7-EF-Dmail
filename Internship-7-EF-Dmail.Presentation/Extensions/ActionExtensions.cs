@@ -1,6 +1,7 @@
 ﻿using Internship_7_EF_Dmail.Presentation.Actions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
+using static Internship_7_EF_Dmail.Presentation.Utils.Input;
 
 namespace Internship_7_EF_Dmail.Presentation.Extensions
 {

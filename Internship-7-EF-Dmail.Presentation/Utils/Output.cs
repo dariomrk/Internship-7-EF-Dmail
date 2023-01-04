@@ -1,4 +1,7 @@
-﻿namespace Internship_7_EF_Dmail.Presentation.Utils
+﻿using Internship_7_EF_Dmail.Data.Models;
+using Internship_7_EF_Dmail.Presentation.Extensions;
+
+namespace Internship_7_EF_Dmail.Presentation.Utils
 {
     public static class Output
     {
@@ -69,10 +72,10 @@
             Console.ResetColor();
         }
 
-        public static void WaitForInput()
+        public static void WriteMailsAscending(IList<Mail> mails)
         {
-            WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            IList<Mail> ordered = mails.OrderBy(m => m.CreatedAt).ToList();
+            ordered.ForEach((m, i) => WriteLine($"{i}. | {m.Title.Truncate(24).PadRight(24)} | {m.Sender.Email.Truncate(24).PadRight(24)}"));
         }
     }
 }

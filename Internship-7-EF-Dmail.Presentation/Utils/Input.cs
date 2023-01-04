@@ -16,6 +16,11 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             Write(message);
             return Console.ReadLine() ?? string.Empty;
         }
+        public static void WaitForInput()
+        {
+            WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
 
         public static string ReadPassword(string message)
         {

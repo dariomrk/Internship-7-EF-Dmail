@@ -1,8 +1,8 @@
 ﻿using Internship_7_EF_Dmail.Presentation.Interfaces;
 
-namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox
+namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions
 {
-    public class InboxUnreadMailAction : IAction
+    public class MailsFromSenderAction : IAction
     {
         public int Index { get; set; }
         public string Name => "Unread Mail";
