@@ -10,6 +10,7 @@ namespace Internship_7_EF_Dmail.Data.Models
         public DateTime CreatedAt { get; set; }
         public UserStatus Status { get; set; }
         public UserRights Rights { get; set; }
+        public DateTime LastFailedLogin { get; set; }
 
         public ICollection<Mail> Sent { get; set; } = new List<Mail>();
 

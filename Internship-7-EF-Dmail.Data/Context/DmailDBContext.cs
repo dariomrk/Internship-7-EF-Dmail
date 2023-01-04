@@ -44,6 +44,10 @@ namespace Internship_7_EF_Dmail.Data.Context
                 .IsRequired()
                 .HasDefaultValue(UserRights.Standard);
 
+            userEntity.Property(u => u.LastFailedLogin)
+                .IsRequired()
+                .HasDefaultValue(DateTime.MinValue);
+
             #endregion
 
             #region Mail configuration
