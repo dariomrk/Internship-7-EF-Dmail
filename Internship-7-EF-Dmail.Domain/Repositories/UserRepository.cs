@@ -139,9 +139,17 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             if (toAuth == null)
                 return Response.ErrorNotFound;
 
+            if((DateTime.UtcNow - toAuth.LastFailedLogin) < TimeSpan.FromSeconds(30))
+                return Response.ErrorViolatesRequirements;
+
             if (!Password.Verify(password, toAuth.Password))
+            {
+                toAuth.LastFailedLogin = DateTime.UtcNow;
+                context.SaveChanges();
                 return Response.ErrorInvalidPassword;
+            }
             return Response.Succeeded;
+
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Internship_7_EF_Dmail.Domain.Factories
     {
         public static TRepo Create<TRepo>() where TRepo : BaseRepository
         {
-            DmailDBContext context = DBContextFactory.GetDmailDBContext();
+            DmailDBContext context = DBContextFactory.CreateDBContext();
             var repository = Activator.CreateInstance(typeof(TRepo), context) as TRepo;
 
             return repository!;

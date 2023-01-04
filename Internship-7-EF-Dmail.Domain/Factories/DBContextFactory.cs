@@ -6,7 +6,7 @@ namespace Internship_7_EF_Dmail.Domain.Factories
 {
     public static class DBContextFactory
     {
-        public static DmailDBContext GetDmailDBContext()
+        public static DmailDBContext CreateDBContext()
         {
             var options = new DbContextOptionsBuilder()
                 .UseNpgsql(ConfigurationManager.ConnectionStrings["DmailApp"].ConnectionString)
