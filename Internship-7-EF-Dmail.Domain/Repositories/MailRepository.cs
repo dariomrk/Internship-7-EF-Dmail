@@ -14,9 +14,10 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
         public Mail? GetById(int id) => context.Mails.Find(id);
 
-        public ICollection<Mail> GetAll() => context.Mails.ToList();
-
-        public ICollection<Mail> GetAllWithSender() => context.Mails.Include(m => m.Sender).ToList();
+        public ICollection<Mail> GetAll() => context.Mails
+            .Include(m => m.Sender)
+            .Include(m => m.Recipients)
+            .ToList();
 
         public ICollection<Mail> GetWhereSender(int senderId) => GetAll().Where(m => m.SenderId == senderId).ToList();
 
