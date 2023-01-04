@@ -102,6 +102,27 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
         {
             throw new NotSupportedException("Cannot delete a mail by id.");
         }
+
+        public Response RemoveFromInbox(int mailId, int userId)
+        {
+            Mail? toRemove = GetWhereReciever(userId).FirstOrDefault(m => m.Id == mailId);
+
+            if (toRemove == null)
+                return Response.ErrorNotFound;
+
+            Recipient recipient = context.Recipients.Find(mailId, userId)!;
+
+            context.Recipients.Remove(recipient);
+
+            return SaveChanges();
+        }
+
+        public Response RemoveFromOutbox(int mailId)
+        {
+            throw new NotImplementedException();
+            // TODO Implement feature
+            // - Add hidden property to Mail entity?
+        }
     }
 
 }
