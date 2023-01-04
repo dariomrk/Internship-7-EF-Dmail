@@ -56,6 +56,10 @@ namespace Internship_7_EF_Dmail.Data.Context
                 .IsRequired()
                 .HasDefaultValueSql("timezone('utc', now())");
 
+            mailEntity.Property(m => m.HiddenFromSender)
+                .IsRequired()
+                .HasDefaultValue(false);
+
             mailEntity.Property(m => m.Format)
                 .IsRequired();
 

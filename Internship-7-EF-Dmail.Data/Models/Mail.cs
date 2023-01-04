@@ -7,6 +7,7 @@ namespace Internship_7_EF_Dmail.Data.Models
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
+        public bool HiddenFromSender { get; set; }
         public MailFormat Format { get; set; }
         public string? Content { get; set; }
         public DateTime? EventStartAt { get; set; }
