@@ -75,7 +75,12 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         public static void WriteMailsAscending(IList<Mail> mails)
         {
             IList<Mail> ordered = mails.OrderBy(m => m.CreatedAt).ToList();
-            ordered.ForEach((m, i) => WriteLine($"{i}. | {m.Title.Truncate(24).PadRight(24)} | {m.Sender.Email.Truncate(24).PadRight(24)}"));
+            WriteLine("Ord. |" +
+                " Title                    |" +
+                " Sender                ");
+            ordered.ForEach((m, i) => WriteLine($"{i}.   |" +
+                $" {m.Title.Truncate(24).PadRight(24)} |" +
+                $" {m.Sender.Email.Truncate(24).PadRight(24)}"));
         }
     }
 }
