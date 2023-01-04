@@ -8,5 +8,10 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox
         {
             Name = "Inbox";
         }
+
+        public override void Open()
+        {
+            base.Open();
+        }
     }
 }

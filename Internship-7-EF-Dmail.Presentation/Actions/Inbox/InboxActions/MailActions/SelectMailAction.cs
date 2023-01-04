@@ -4,6 +4,7 @@ using Internship_7_EF_Dmail.Presentation.Interfaces;
 using static Internship_7_EF_Dmail.Presentation.Utils.Input;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 using Internship_7_EF_Dmail.Presentation.Actions;
+using Internship_7_EF_Dmail.Presentation.Extensions;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActions
 {
@@ -39,7 +40,6 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActi
         }
         public override void Open()
         {
-            Console.Clear();
 
             IList<Mail> mails = _mailRepository.GetWhereRecieverAndStatus(
                 AuthAction.GetCurrentLogin()!.Id,
@@ -48,15 +48,13 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActi
                 .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 
-            if (!mails.Any())
-                return;
-
             Mail? selected;
 
             while (true)
             {
                 Console.Clear();
                 WriteMails(mails);
+                WriteLine();
                 if (!TrySelectMailByIndex(mails, out selected))
                     continue;
                 break;
@@ -66,9 +64,11 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActi
                 selected!.Id,
                 AuthAction.GetCurrentLogin()!.Id,
                 Data.Enums.MailStatus.Read).ToString();
+
             WriteMail(selected);
+            WriteLine();
             _selectedMail = selected;
-            base.Open();
+            AllActions.WriteActionsAndOpen(false);
         }
     }
 }

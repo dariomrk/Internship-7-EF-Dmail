@@ -4,7 +4,7 @@ using Internship_7_EF_Dmail.Presentation.Interfaces;
 using static Internship_7_EF_Dmail.Presentation.Utils.Input;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 using Internship_7_EF_Dmail.Presentation.Extensions;
-using static Internship_7_EF_Dmail.Presentation.Messages.Messages;
+using static Internship_7_EF_Dmail.Presentation.Utils.Messages;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions
 {
