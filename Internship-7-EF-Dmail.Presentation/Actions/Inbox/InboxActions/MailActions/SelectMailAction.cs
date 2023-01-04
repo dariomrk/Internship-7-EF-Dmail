@@ -3,7 +3,6 @@ using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 using static Internship_7_EF_Dmail.Presentation.Utils.Input;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
-using Internship_7_EF_Dmail.Presentation.Actions;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActions
@@ -69,6 +68,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActi
             WriteLine();
             _selectedMail = selected;
             AllActions.WriteActionsAndOpen(false);
+            ClearSelectedMail();
         }
     }
 }
