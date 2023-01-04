@@ -131,5 +131,17 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
                 return true;
             return false;
         }
+
+        public Response Authenticate(string email, string password)
+        {
+            User? toAuth = context.Users.FirstOrDefault(u => u.Email == email);
+
+            if (toAuth == null)
+                return Response.ErrorNotFound;
+
+            if (!Password.Verify(password, toAuth.Password))
+                return Response.ErrorInvalidPassword;
+            return Response.Succeeded;
+        }
     }
 }
