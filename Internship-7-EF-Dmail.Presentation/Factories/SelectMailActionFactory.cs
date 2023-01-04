@@ -14,6 +14,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
             var actions = new List<IAction>()
             {
                 new ReturnAction(),
+                new MarkAsUnreadAction(RepositoryFactory.Create<MailRepository>()),
             };
 
             actions.SetIndexes();

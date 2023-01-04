@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Internship-7-EF-Dmail.Presentation/App.config
+/Internship-7-EF-Dmail.Presentation/Actions/AuthAction-DEV.cs
+/Internship-7-EF-Dmail.Presentation/Factories/AuthActionDevFactory.cs

@@ -9,6 +9,24 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActi
 {
     public class SelectMailAction : BaseMenuAction
     {
+        private static Mail _selectedMail;
+
+        public static void ClearSelectedMail()
+        {
+            _selectedMail = null;
+        }
+
+        public static Mail? GetSelectedMail()
+        {
+            if(_selectedMail == null)
+                return null;
+
+            return new Mail()
+            {
+                Id = _selectedMail.Id,
+            };
+        }
+
         private readonly MailRepository _mailRepository;
         private readonly Data.Enums.MailStatus _status;
         public SelectMailAction(MailRepository mailRepository,
@@ -49,6 +67,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions.MailActi
                 AuthAction.GetCurrentLogin()!.Id,
                 Data.Enums.MailStatus.Read).ToString();
             WriteMail(selected);
+            _selectedMail = selected;
+            base.Open();
         }
     }
 }

@@ -94,7 +94,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 " Sender                ");
             if (!mails.Any())
                 return;
-            mails.ForEach((m, i) => WriteLine($"{i}.   |" +
+            mails.ForEach((m, i) => WriteLine($"{i}    |" +
                 $" {m.Title.Truncate(24).PadRight(24)} |" +
                 $" {m.Sender.Email.Truncate(24).PadRight(24)}"));
         }

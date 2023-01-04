@@ -42,6 +42,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.Inbox.InboxActions
             }
 
             WriteMails(mails);
+            WriteLine();
+
             AllActions.WriteActionsAndOpen(false);
         }
     }

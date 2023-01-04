@@ -104,7 +104,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 return false;
             }
 
-            Write("Input the index of the mail you want to select:");
+            Write("Input the index of the mail you want to select: ");
 
             if (!int.TryParse(Read(), out int userInput))
             {

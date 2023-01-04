@@ -9,9 +9,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Actions\Administration\**" />
     <Compile Remove="Actions\Inbox\InboxActions\MailActions\OpenMailActions\**" />
+    <Compile Remove="Actions\NewEvent\**" />
+    <Compile Remove="Actions\NewMail\**" />
+    <Compile Remove="Actions\Outbox\**" />
+    <Compile Remove="Actions\ProfileSettings\**" />
+    <Compile Remove="Actions\Spam\**" />
+    <EmbeddedResource Remove="Actions\Administration\**" />
     <EmbeddedResource Remove="Actions\Inbox\InboxActions\MailActions\OpenMailActions\**" />
+    <EmbeddedResource Remove="Actions\NewEvent\**" />
+    <EmbeddedResource Remove="Actions\NewMail\**" />
+    <EmbeddedResource Remove="Actions\Outbox\**" />
+    <EmbeddedResource Remove="Actions\ProfileSettings\**" />
+    <EmbeddedResource Remove="Actions\Spam\**" />
+    <None Remove="Actions\Administration\**" />
     <None Remove="Actions\Inbox\InboxActions\MailActions\OpenMailActions\**" />
+    <None Remove="Actions\NewEvent\**" />
+    <None Remove="Actions\NewMail\**" />
+    <None Remove="Actions\Outbox\**" />
+    <None Remove="Actions\ProfileSettings\**" />
+    <None Remove="Actions\Spam\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,15 +41,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Internship-7-EF-Dmail.Domain\Internship-7-EF-Dmail.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Actions\Administration\" />
-    <Folder Include="Actions\NewEvent\" />
-    <Folder Include="Actions\NewMail\" />
-    <Folder Include="Actions\Outbox\" />
-    <Folder Include="Actions\ProfileSettings\" />
-    <Folder Include="Actions\Spam\" />
   </ItemGroup>
 
 </Project>

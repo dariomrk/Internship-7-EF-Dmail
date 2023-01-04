@@ -44,46 +44,47 @@ namespace Internship_7_EF_Dmail.Presentation.Actions
         public override void Open()
         {
             Console.Clear();
-            WriteLine(Name);
+            //WriteLine(Name);
 
-            if (DateTime.UtcNow - _lastLogin < TimeSpan.FromSeconds(30))
-            {
-                WriteLine($"You have been timed out. " +
-                    $"Please wait {(TimeSpan.FromSeconds(30) - (DateTime.UtcNow - _lastLogin)).Seconds}s" +
-                    $" for the next login attempt.", Style.Warning);
-                WaitForInput();
-                return;
-            }
+            //if (DateTime.UtcNow - _lastLogin < TimeSpan.FromSeconds(30))
+            //{
+            //    WriteLine($"You have been timed out. " +
+            //        $"Please wait {(TimeSpan.FromSeconds(30) - (DateTime.UtcNow - _lastLogin)).Seconds}s" +
+            //        $" for the next login attempt.", Style.Warning);
+            //    WaitForInput();
+            //    return;
+            //}
 
-            string email = Read("Input email: ");
+            //string email = Read("Input email: ");
 
-            if (!_userRepository.EmailExists(email))
-            {
-                WriteLine("Email does not exist.", Style.Error);
-                WaitForInput();
-                return;
-            }
+            //if (!_userRepository.EmailExists(email))
+            //{
+            //    WriteLine("Email does not exist.", Style.Error);
+            //    WaitForInput();
+            //    return;
+            //}
 
-            string password = ReadPassword("Input password: ");
-            if (_authRepository.Authenticate(email, password) == Response.ErrorInvalidPassword)
-            {
-                _lastLogin = DateTime.UtcNow;
-                WriteLine("Password is invalid.", Style.Error);
-                WaitForInput();
-                return;
-            }
+            //string password = ReadPassword("Input password: ");
+            //if (_authRepository.Authenticate(email, password) == Response.ErrorInvalidPassword)
+            //{
+            //    _lastLogin = DateTime.UtcNow;
+            //    WriteLine("Password is invalid.", Style.Error);
+            //    WaitForInput();
+            //    return;
+            //}
 
-            if (!_userRepository.IsActive(email))
-            {
-                WriteLine("Account is disabled.", Style.Error);
-                WaitForInput();
-                return;
-            }
-            Console.Clear();
-            WriteLine($"Authenticated as {email}.", Style.Success);
-            WaitForInput();
+            //if (!_userRepository.IsActive(email))
+            //{
+            //    WriteLine("Account is disabled.", Style.Error);
+            //    WaitForInput();
+            //    return;
+            //}
+            //Console.Clear();
+            //WriteLine($"Authenticated as {email}.", Style.Success);
+            //WaitForInput();
 
-            _loggedInAs = _userRepository.GetByEmail(email);
+            //_loggedInAs = _userRepository.GetByEmail(email);
+            _loggedInAs = _userRepository.GetByEmail("dario@dmail.hr");
 
             base.Open();
         }
