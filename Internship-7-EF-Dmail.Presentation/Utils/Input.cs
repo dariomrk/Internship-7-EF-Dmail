@@ -1,4 +1,5 @@
-﻿using System.Security.AccessControl;
+﻿using Internship_7_EF_Dmail.Presentation.Extensions;
+using System.Security.AccessControl;
 using System.Text;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 
@@ -29,6 +30,11 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             while (true)
             {
                 var key = Console.ReadKey(true);
+                if(key.Key == ConsoleKey.Backspace || key.Key == ConsoleKey.Delete)
+                {
+                    password = password.Truncate(password.Length-1);
+                    continue;
+                }
                 if (key.Key == ConsoleKey.Enter)
                     break;
                 password += key.KeyChar;
