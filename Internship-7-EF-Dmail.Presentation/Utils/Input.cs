@@ -22,7 +22,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static void WaitForInput()
         {
-            WriteLine("Press any key to continue...");
+            WriteLine(Messages.OTHER_PRESS_ANY_KEY);
             Console.ReadKey();
         }
 
@@ -51,7 +51,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             while(true)
             {
                 WriteLine(message);
-                Write("Input Y to confirm or N (no) to cancel: ");
+                Write(Messages.OTHER_CONFIRMATION_Y_N);
                 string input = Read().ToLower();
 
                 if (input == "y")
@@ -59,7 +59,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 if (input == "n")
                     return false;
 
-                WriteLine("Invalid input.", Style.Error);
+                WriteLine(Messages.ERROR_INVALID, Style.Error);
                 WaitForInput();
             }
         }
@@ -99,7 +99,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             if(!mails.Any())
             {
-                WriteLine("There are no mails to show.", Style.Warning);
+                WriteLine(Messages.WARN_NO_MAILS, Style.Warning);
                 WaitForInput();
                 return false;
             }
@@ -108,14 +108,14 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             if (!int.TryParse(Read(), out int userInput))
             {
-                WriteLine("Invalid input.", Style.Error);
+                WriteLine(Messages.ERROR_INVALID, Style.Error);
                 WaitForInput();
                 return false;
             }
 
             if(userInput < 0 || userInput > mails.Count())
             {
-                WriteLine("Mail does not exist.", Style.Error);
+                WriteLine(Messages.ERROR_MAIL_DOES_NOT_EXIST, Style.Error);
                 WaitForInput();
                 return false;
             }

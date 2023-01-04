@@ -1,7 +1,8 @@
-﻿using Internship_7_EF_Dmail.Presentation.Actions;
-using Internship_7_EF_Dmail.Presentation.Interfaces;
+﻿using Internship_7_EF_Dmail.Presentation.Interfaces;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 using static Internship_7_EF_Dmail.Presentation.Utils.Input;
+using Internship_7_EF_Dmail.Presentation.Actions;
+using Internship_7_EF_Dmail.Presentation.Utils;
 
 namespace Internship_7_EF_Dmail.Presentation.Extensions
 {
@@ -19,17 +20,19 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
 
         public static void WriteActionsAndOpen(this IList<IAction> actions, bool clear = true)
         {
-            while (true)
+            bool isExitSelected = false;
+
+            do
             {
-                if(clear)
+                if (clear)
                     Console.Clear();
 
                 actions.WriteActions();
-                Write("Select one of the provided options: ");
+                Write(Messages.OTHER_SELECT_OPTION);
 
                 if (!int.TryParse(Console.ReadLine(), out int userInput))
                 {
-                    WriteLine("Cannot parse input. Please input an integer.", Style.Error);
+                    WriteLine(Messages.ERROR_PARSE, Style.Error);
                     WaitForInput();
                     continue;
                 }
@@ -38,16 +41,16 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
 
                 if (selectedAction == null)
                 {
-                    WriteLine("Option does not exist. Please input a valid option.", Style.Error);
+                    WriteLine(Messages.ERROR_OPTION_OUT_OF_RANGE, Style.Error);
                     WaitForInput();
                     continue;
                 }
 
-                if (selectedAction is ReturnAction)
-                    return;
-
                 selectedAction.Open();
+
+                isExitSelected = selectedAction is ExitMenuAction;
             }
+            while (!isExitSelected);
         }
     }
 }

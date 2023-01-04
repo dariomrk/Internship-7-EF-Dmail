@@ -8,11 +8,33 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
     {
         public enum Style
         {
+            /// <summary>
+            /// No prepend, white on black.
+            /// </summary>
             Standard,
-            Accepted,
+            /// <summary>
+            /// No prepend, white on green.
+            /// </summary>
+            Positive,
+            /// <summary>
+            /// "Success: ", white on green.
+            /// </summary>
             Success,
+            /// <summary>
+            /// No prepend, black on yellow.
+            /// </summary>
+            Emphasis,
+            /// <summary>
+            /// "Warning: ", black on yellow.
+            /// </summary>
             Warning,
-            Rejected,
+            /// <summary>
+            /// No prepend, white on red.
+            /// </summary>
+            Negative,
+            /// <summary>
+            /// "Error! ", white on red.
+            /// </summary>
             Error,
         }
 
@@ -39,10 +61,16 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     Background = ConsoleColor.DarkGreen,
                     PrependMessage = "Success: ",
                 },
-                Style.Accepted => new StyleSettings
+                Style.Positive => new StyleSettings
                 {
                     Foreground = ConsoleColor.White,
                     Background = ConsoleColor.DarkGreen,
+                    PrependMessage = "",
+                },
+                Style.Emphasis => new StyleSettings
+                {
+                    Foreground = ConsoleColor.Black,
+                    Background = ConsoleColor.DarkYellow,
                     PrependMessage = "",
                 },
                 Style.Warning => new StyleSettings
@@ -51,7 +79,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     Background = ConsoleColor.DarkYellow,
                     PrependMessage = "Warning: ",
                 },
-                Style.Rejected => new StyleSettings
+                Style.Negative => new StyleSettings
                 {
                     Foreground = ConsoleColor.White,
                     Background = ConsoleColor.DarkRed,
@@ -106,8 +134,8 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             {
                 Write($"\t{(recipient.User == null ? "My response" : recipient.User.Email)} : ");
                 if (recipient.EventStatus == EventStatus.NoResponse) WriteLine("No response");
-                else if (recipient.EventStatus == EventStatus.Accepted) WriteLine("Accepted", Style.Accepted);
-                else if (recipient.EventStatus == EventStatus.Rejected) WriteLine("Rejected", Style.Rejected);
+                else if (recipient.EventStatus == EventStatus.Accepted) WriteLine("Accepted", Style.Positive);
+                else if (recipient.EventStatus == EventStatus.Rejected) WriteLine("Rejected", Style.Negative);
             }
         }
 

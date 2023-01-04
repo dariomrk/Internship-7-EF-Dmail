@@ -2,14 +2,14 @@
 
 namespace Internship_7_EF_Dmail.Presentation.Actions
 {
-    public class ExitApplicationAction : IAction
+    public class ExitMenuAction : IAction
     {
         public int Index { get; set; }
-        public string Name { get; } = "Exit the application";
+
+        public string Name => "Exit";
 
         public void Open()
         {
-            Environment.Exit(0);
         }
     }
 }
