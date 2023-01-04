@@ -1,4 +1,5 @@
 ﻿using Internship_7_EF_Dmail.Data.Context;
+using Internship_7_EF_Dmail.Data.Enums;
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Domain.Repositories.Interfaces;
@@ -27,6 +28,15 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             r => r.MailId,
             (m, r) => new { m, r })
             .Where(a => a.r.UserId == recieverId)
+            .Select(a => a.m)
+            .ToList();
+
+        public ICollection<Mail> GetWhereRecieverAndStatus(int recieverId, MailStatus status) => GetAll()
+            .Join(context.Recipients,
+            m => m.Id,
+            r => r.MailId,
+            (m, r) => new { m, r })
+            .Where(a=> a.r.UserId == recieverId && a.r.MailStatus == status)
             .Select(a => a.m)
             .ToList();
 
