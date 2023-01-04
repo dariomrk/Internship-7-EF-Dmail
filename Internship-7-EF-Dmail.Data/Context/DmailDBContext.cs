@@ -1,5 +1,5 @@
-﻿using Internship_7_EF_Dmail.Data.Models;
-using Internship_7_EF_Dmail.Data.Enums;
+﻿using Internship_7_EF_Dmail.Data.Enums;
+using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -74,7 +74,7 @@ namespace Internship_7_EF_Dmail.Data.Context
 
             #region Recipient configuration
             var recipientEntity = modelBuilder.Entity<Recipient>();
-            
+
             recipientEntity.HasKey(r => new { r.MailId, r.UserId });
 
             recipientEntity.Property(r => r.MailStatus)
@@ -103,7 +103,7 @@ namespace Internship_7_EF_Dmail.Data.Context
             var options = new DbContextOptionsBuilder<DmailDBContext>()
                 .UseNpgsql(connectionString)
                 .Options;
-            
+
             return new DmailDBContext(options);
         }
     }

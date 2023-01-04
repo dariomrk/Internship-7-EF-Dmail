@@ -1,8 +1,8 @@
-﻿using Internship_7_EF_Dmail.Presentation.Interfaces;
-using static Internship_7_EF_Dmail.Presentation.Utils.Output;
-using static Internship_7_EF_Dmail.Presentation.Utils.Input;
-using Internship_7_EF_Dmail.Presentation.Actions;
+﻿using Internship_7_EF_Dmail.Presentation.Actions;
+using Internship_7_EF_Dmail.Presentation.Interfaces;
 using Internship_7_EF_Dmail.Presentation.Utils;
+using static Internship_7_EF_Dmail.Presentation.Utils.Input;
+using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 
 namespace Internship_7_EF_Dmail.Presentation.Extensions
 {
@@ -10,7 +10,7 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
     {
         public static void SetIndexes(this IList<IAction> actions)
         {
-            actions.ForEach((action,index) => action.Index = index);
+            actions.ForEach((action, index) => action.Index = index);
         }
 
         public static void WriteActions(this IList<IAction> actions)

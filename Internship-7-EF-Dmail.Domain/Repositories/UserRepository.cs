@@ -124,7 +124,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
         {
             User? toCheck = GetByEmail(email);
 
-            if(toCheck == null)
+            if (toCheck == null)
                 return false;
 
             if (toCheck.Status == Data.Enums.UserStatus.Active)

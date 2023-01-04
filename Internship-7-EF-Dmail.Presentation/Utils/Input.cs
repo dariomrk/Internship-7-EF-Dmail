@@ -1,8 +1,5 @@
 ﻿using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Presentation.Extensions;
-using System.Security.AccessControl;
-using System.Security.Cryptography;
-using System.Text;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 
 namespace Internship_7_EF_Dmail.Presentation.Utils
@@ -33,7 +30,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             while (true)
             {
                 var key = Console.ReadKey(true);
-                if(key.Key == ConsoleKey.Backspace || key.Key == ConsoleKey.Delete)
+                if (key.Key == ConsoleKey.Backspace || key.Key == ConsoleKey.Delete)
                 {
                     password = password.Truncate(password.Length-1);
                     continue;
@@ -48,7 +45,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static bool GetConfirmation(string message)
         {
-            while(true)
+            while (true)
             {
                 WriteLine(message);
                 Write(Messages.OTHER_CONFIRMATION_Y_N);
@@ -71,10 +68,10 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             for (int i = 0; i < 8; i++)
             {
-                switch (r.Next(0,3))
+                switch (r.Next(0, 3))
                 {
                     case 0:
-                        output += (char) r.Next(48, 58);
+                        output += (char)r.Next(48, 58);
                         break;
                     case 1:
                         output += (char)r.Next(65, 91);
@@ -97,7 +94,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         {
             selected = null;
 
-            if(!mails.Any())
+            if (!mails.Any())
             {
                 WriteLine(Messages.WARN_NO_MAILS, Style.Warning);
                 WaitForInput();
@@ -113,7 +110,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 return false;
             }
 
-            if(userInput < 0 || userInput > mails.Count())
+            if (userInput < 0 || userInput > mails.Count())
             {
                 WriteLine(Messages.ERROR_MAIL_DOES_NOT_EXIST, Style.Error);
                 WaitForInput();

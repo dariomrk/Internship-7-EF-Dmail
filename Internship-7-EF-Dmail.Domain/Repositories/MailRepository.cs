@@ -36,7 +36,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             m => m.Id,
             r => r.MailId,
             (m, r) => new { m, r })
-            .Where(a=> a.r.UserId == recieverId && a.r.MailStatus == status)
+            .Where(a => a.r.UserId == recieverId && a.r.MailStatus == status)
             .Select(a => a.m)
             .ToList();
 

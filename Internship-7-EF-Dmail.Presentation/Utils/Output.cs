@@ -142,7 +142,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         public static void WriteMail(Mail mail)
         {
             Console.Clear();
-            if(mail.Format == MailFormat.Email)
+            if (mail.Format == MailFormat.Email)
             {
                 WriteLine(
                     $"Title:      {mail.Title}\n" +
@@ -150,7 +150,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     $"Sender:     {mail.Sender.Email}\n" +
                     $"Content:\n{mail.Content}");
             }
-            else if(mail.Format == MailFormat.Event)
+            else if (mail.Format == MailFormat.Event)
             {
                 WriteLine(
                     $"Title:            {mail.Title}\n" +
