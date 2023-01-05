@@ -65,5 +65,9 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             return base.SaveChanges();
         }
 
+        public ICollection<SpamFlag> GetSpamFlagsForUser(int userId) => GetAll()
+            .Where(sf => sf.UserId == userId)
+            .ToList();
+
     }
 }

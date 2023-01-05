@@ -11,9 +11,13 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     public class ReadUnreadMailAction : IAction
     {
         private readonly MailRepository _mailRepository;
+        private readonly SpamFlagRepository _spamFlagRepository;
         private MailStatus _mailStatus;
 
-        public ReadUnreadMailAction(MailRepository mailRepository, MailStatus mailStatus)
+        public ReadUnreadMailAction(
+            MailRepository mailRepository,
+            SpamFlagRepository spamFlagRepository,
+            MailStatus mailStatus)
         {
             Name = mailStatus switch
             {
@@ -22,6 +26,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 _ => throw new NotSupportedException(),
             };
             _mailRepository=mailRepository;
+            _spamFlagRepository=spamFlagRepository;
             _mailStatus=mailStatus;
         }
         public string Name { get; }
@@ -31,14 +36,24 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         {
             Console.Clear();
             
-            IList<Mail> mails = _mailRepository
+            IList<Mail> query = _mailRepository
                 .GetWhereRecieverAndStatus(
                 AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
                 _mailStatus)
                 .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 
-            if(!mails.Any())
+            IList<SpamFlag> mySpamFlags = _spamFlagRepository
+                .GetSpamFlagsForUser(AuthAction.GetCurrentlyAuthenticatedUser()!.Id)
+                .ToList();
+
+            IList<Mail> mails = query
+                .Where(m => !mySpamFlags
+                .Select(sf => sf.FlaggedUserId)
+                .Contains(m.SenderId))
+                .ToList();
+
+            if (!mails.Any())
             {
                 WriteLine(WARN_NO_MAILS, Style.Warning);
                 WaitForInput();

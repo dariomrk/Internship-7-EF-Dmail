@@ -18,10 +18,12 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
 
                 new ReadUnreadMailAction(
                     RepositoryFactory.Create<MailRepository>(),
+                    RepositoryFactory.Create<SpamFlagRepository>(),
                     MailStatus.Read),
 
                 new ReadUnreadMailAction(
                     RepositoryFactory.Create<MailRepository>(),
+                    RepositoryFactory.Create<SpamFlagRepository>(),
                     MailStatus.Unread),
 
                 new MailFromSenderAction(
