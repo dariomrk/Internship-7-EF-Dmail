@@ -6,7 +6,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions
     {
         public int Index { get; set; }
 
-        public string Name => "Exit";
+        public virtual string Name => "Exit";
 
         public void Open()
         {

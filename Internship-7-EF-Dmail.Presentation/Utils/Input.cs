@@ -19,7 +19,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static void WaitForInput()
         {
-            WriteLine(Messages.OTHER_PRESS_ANY_KEY);
+            WriteLine(PROMPT_PRESS_ANY_KEY);
             Console.ReadKey();
         }
 
@@ -43,12 +43,13 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             return password;
         }
 
-        public static bool GetConfirmation(string message)
+        public static bool GetConfirmation(string message = "")
         {
             while (true)
             {
-                WriteLine(message);
-                Write(Messages.OTHER_CONFIRMATION_Y_N);
+                if(!string.IsNullOrEmpty(message))
+                    WriteLine(message);
+                Write(PROMPT_CONFIRMATION_Y_N);
                 string input = Read().ToLower();
 
                 if (input == "y")
@@ -56,7 +57,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 if (input == "n")
                     return false;
 
-                WriteLine(Messages.ERROR_INVALID, Style.Error);
+                WriteLine(ERROR_INVALID, Style.Error);
                 WaitForInput();
             }
         }
@@ -96,7 +97,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             if (!mails.Any())
             {
-                WriteLine(Messages.WARN_NO_MAILS, Style.Warning);
+                WriteLine(WARN_NO_MAILS, Style.Warning);
                 WaitForInput();
                 return false;
             }
@@ -105,14 +106,14 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             if (!int.TryParse(Read(), out int userInput))
             {
-                WriteLine(Messages.ERROR_INVALID, Style.Error);
+                WriteLine(ERROR_INVALID, Style.Error);
                 WaitForInput();
                 return false;
             }
 
             if (userInput < 0 || userInput > mails.Count())
             {
-                WriteLine(Messages.ERROR_MAIL_DOES_NOT_EXIST, Style.Error);
+                WriteLine(ERROR_MAIL_DOES_NOT_EXIST, Style.Error);
                 WaitForInput();
                 return false;
             }

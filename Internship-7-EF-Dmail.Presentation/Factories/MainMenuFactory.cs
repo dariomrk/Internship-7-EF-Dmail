@@ -1,4 +1,7 @@
-﻿using Internship_7_EF_Dmail.Presentation.Actions;
+﻿using Internship_7_EF_Dmail.Domain.Factories;
+using Internship_7_EF_Dmail.Domain.Repositories;
+using Internship_7_EF_Dmail.Presentation.Actions;
+using Internship_7_EF_Dmail.Presentation.Actions.AuthRegister;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
@@ -11,6 +14,8 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
             var actions = new List<IAction>()
             {
                 new ExitMenuAction(),
+                new AuthAction(RepositoryFactory.Create<UserRepository>()),
+                new RegisterAction(RepositoryFactory.Create<UserRepository>()),
             };
 
             actions.SetIndexes();

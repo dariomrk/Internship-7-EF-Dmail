@@ -1,8 +1,5 @@
 ﻿using Internship_7_EF_Dmail.Presentation.Actions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
-using Internship_7_EF_Dmail.Presentation.Utils;
-using static Internship_7_EF_Dmail.Presentation.Utils.Input;
-using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 
 namespace Internship_7_EF_Dmail.Presentation.Extensions
 {
@@ -28,11 +25,11 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
                     Console.Clear();
 
                 actions.WriteActions();
-                Write(Messages.OTHER_SELECT_OPTION);
+                Write(PROMPT_SELECT_OPTION);
 
                 if (!int.TryParse(Console.ReadLine(), out int userInput))
                 {
-                    WriteLine(Messages.ERROR_PARSE, Style.Error);
+                    WriteLine(ERROR_PARSE, Style.Error);
                     WaitForInput();
                     continue;
                 }
@@ -41,7 +38,7 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
 
                 if (selectedAction == null)
                 {
-                    WriteLine(Messages.ERROR_OPTION_OUT_OF_RANGE, Style.Error);
+                    WriteLine(ERROR_OPTION_OUT_OF_RANGE, Style.Error);
                     WaitForInput();
                     continue;
                 }
