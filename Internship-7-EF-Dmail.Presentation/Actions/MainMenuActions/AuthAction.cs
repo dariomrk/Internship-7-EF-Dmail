@@ -54,33 +54,35 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
 
             Response response = _userRepository.Authenticate(email, password);
 
-            if(response == Response.ErrorAccoundDisabled)
+            switch (response)
             {
-                WriteLine("The account is disabled.", Style.Error);
-                WaitForInput();
-                return;
+                case Response.ErrorAccoundDisabled:
+                    WriteLine("The account is disabled.", Style.Error);
+                    WaitForInput();
+                    return;
+                case Response.ErrorViolatesRequirements:
+                    WriteLine("You have been timed out.", Style.Warning);
+                    WaitForInput();
+                    return;
+                case Response.ErrorInvalidPassword:
+                    WriteLine("The password you provided is invalid.", Style.Error);
+                    WriteLine("You have been timed out for 30s.", Style.Warning);
+                    WaitForInput();
+                    return;
+                case Response.ErrorNotFound:
+                    WriteLine("The account does not exist.", Style.Error);
+                    WaitForInput();
+                    return;
+                default:
+                    if (response != Response.Succeeded)
+                    {
+                        WriteLine(ERROR_UNHANDLED, Style.Error);
+                        WaitForInput();
+                        return;
+                    }
+                    break;
             }
 
-            if (response == Response.ErrorViolatesRequirements)
-            {
-                WriteLine("You have been timed out.", Style.Warning);
-                WaitForInput();
-                return;
-            }
-            if (response == Response.ErrorInvalidPassword)
-            {
-                WriteLine("The password you provided is invalid.", Style.Error);
-                WriteLine("You have been timed out for 30s.", Style.Warning);
-                WaitForInput();
-                return;
-            }
-            if (response != Response.Succeeded)
-            {
-                WriteLine(ERROR_UNHANDLED, Style.Error);
-                WaitForInput();
-                return;
-            }
-            
             WriteLine($"Authenticated as {email.ToLower()}.", Style.Success);
             AuthAction.SetAuthenticatedUser(_userRepository.GetByEmail(email)!);
             WaitForInput();
