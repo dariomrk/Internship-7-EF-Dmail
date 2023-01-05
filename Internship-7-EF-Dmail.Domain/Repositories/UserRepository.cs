@@ -154,5 +154,9 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             return Response.Succeeded;
 
         }
+
+        public ICollection<User> GetEmailContains(string query) => GetAll()
+            .Where(u => u.Email.Contains(query))
+            .ToList();
     }
 }
