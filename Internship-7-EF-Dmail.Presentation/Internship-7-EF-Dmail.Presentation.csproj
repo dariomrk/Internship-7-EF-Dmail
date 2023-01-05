@@ -40,4 +40,8 @@
     <ProjectReference Include="..\Internship-7-EF-Dmail.Domain\Internship-7-EF-Dmail.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Actions\AuthenticatedUserActions\" />
+  </ItemGroup>
+
 </Project>

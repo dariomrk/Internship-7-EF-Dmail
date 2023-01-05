@@ -3,7 +3,7 @@ using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
-namespace Internship_7_EF_Dmail.Presentation.Actions.AuthRegister
+namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
 {
     public class RegisterAction : IAction
     {
@@ -33,7 +33,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthRegister
 
             Response emailValidationResponse = _userRepository.ValidateEmail(email);
 
-            if(emailValidationResponse == Response.ErrorInvalidFormat)
+            if (emailValidationResponse == Response.ErrorInvalidFormat)
             {
                 WriteLine("The email you provided has an invalid format.", Style.Error);
                 WaitForInput();
@@ -48,7 +48,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthRegister
 
             string password = ReadPassword(PROMPT_PASSWORD);
 
-            if(string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
                 WriteLine("Having no password is a immense safety risk.\n" +
                     "Are you sure you want to continue?", Style.Warning);
@@ -62,16 +62,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthRegister
 
             string confirmPassword = ReadPassword("Plase repeat the password: ");
 
-            if(password != confirmPassword)
+            if (password != confirmPassword)
             {
                 WriteLine("The passwords do not match.", Style.Error);
                 WaitForInput();
                 return;
             }
 
-            if(!Captcha())
+            if (!Captcha())
             {
-                WriteLine("You did not pass the captcha.",Style.Error);
+                WriteLine("You did not pass the captcha.", Style.Error);
                 WaitForInput();
                 return;
             }

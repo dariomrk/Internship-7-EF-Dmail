@@ -9,5 +9,6 @@
         ErrorViolatesRequirements,
         ErrorInvalidFormat,
         ErrorInvalidPassword,
+        ErrorAccoundDisabled,
     }
 }

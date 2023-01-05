@@ -139,6 +139,9 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             if (toAuth == null)
                 return Response.ErrorNotFound;
 
+            if (toAuth.Status == Data.Enums.UserStatus.Disabled)
+                return Response.ErrorAccoundDisabled;
+
             if((DateTime.UtcNow - toAuth.LastFailedLogin) < TimeSpan.FromSeconds(30))
                 return Response.ErrorViolatesRequirements;
 
