@@ -11,7 +11,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
     {
         private static User? _currentlyAuthenticatedUser = null;
         public static void Logout() => _currentlyAuthenticatedUser = null;
-        public static User? GetCurrentlyAuthenticatedUSer()
+        public static User? GetCurrentlyAuthenticatedUser()
         {
             if (_currentlyAuthenticatedUser == null)
                 return null;
@@ -20,6 +20,10 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
                 Id = _currentlyAuthenticatedUser.Id,
                 Email = _currentlyAuthenticatedUser.Email,
             };
+        }
+        private static void SetAuthenticatedUser(User user)
+        {
+            _currentlyAuthenticatedUser = user;
         }
 
         private readonly UserRepository _userRepository;
@@ -76,8 +80,9 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
                 WaitForInput();
                 return;
             }
-
+            
             WriteLine($"Authenticated as {email.ToLower()}.", Style.Success);
+            AuthAction.SetAuthenticatedUser(_userRepository.GetByEmail(email)!);
             WaitForInput();
 
             Console.Clear();
