@@ -52,9 +52,9 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 Write(PROMPT_CONFIRMATION_Y_N);
                 string input = Read().ToLower();
 
-                if (input == "y")
+                if (input == "y" || input == "yes")
                     return true;
-                if (input == "n")
+                if (input == "n" || input == "no")
                     return false;
 
                 WriteLine(ERROR_INVALID, Style.Error);
@@ -120,6 +120,42 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             selected = mails[userInput];
             return true;
+        }
+
+        public static IList<Mail> PromptFilterByFormat(ICollection<Mail> input)
+        {
+            Console.Clear();
+            if(!GetConfirmation("Do you want to filter by mail format?"))
+            {
+                Console.Clear();
+                return input.ToList();
+            }
+
+            Console.Clear();
+            while (true)
+            {
+                Write("Press 1 to filter emails, 2 to filter events: ");
+
+                if(!int.TryParse(Read(),out int userInput))
+                {
+                    WriteLine(ERROR_INVALID,Style.Error);
+                    WaitForInput();
+                    continue;
+                }
+
+                if(userInput != 1 && userInput != 2)
+                {
+                    WriteLine(ERROR_OPTION_OUT_OF_RANGE, Style.Error);
+                    WaitForInput();
+                    continue;
+                }
+                Console.Clear();
+                return userInput == 1 ?
+                    input.Where(m => m.Format == Data.Enums.MailFormat.Email).ToList()
+                    :
+                    input.Where(m => m.Format == Data.Enums.MailFormat.Event).ToList();
+
+            }
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             mailsWhereSender.OrderByDescending(m => m.CreatedAt);
 
-            List<Mail> final = mailsWhereSender
+            List<Mail> recieved = mailsWhereSender
                 .Where(m => m.SenderId != AuthAction.GetCurrentlyAuthenticatedUser()!.Id)
                 .ToList();
 
@@ -60,6 +60,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 WaitForInput();
                 return;
             }
+
+            IList<Mail> final = PromptFilterByFormat(recieved);
 
             Console.Clear();
             WriteMails(final);

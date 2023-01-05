@@ -47,9 +47,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
 
             Console.Clear();
-            WriteMails(mails);
 
-            if (!TrySelectMailByIndex(mails, out Mail? selected))
+            IList<Mail> final = PromptFilterByFormat(mails);
+
+            WriteMails(final);
+
+            if (!TrySelectMailByIndex(final, out Mail? selected))
             {
                 return;
             }
