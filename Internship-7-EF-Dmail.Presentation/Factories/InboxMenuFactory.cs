@@ -15,8 +15,18 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
             var actions = new List<IAction>()
             {
                 new ExitMenuAction(),
-                new ReadUnreadMailAction(RepositoryFactory.Create<MailRepository>(),MailStatus.Read),
-                new ReadUnreadMailAction(RepositoryFactory.Create<MailRepository>(), MailStatus.Unread),
+
+                new ReadUnreadMailAction(
+                    RepositoryFactory.Create<MailRepository>(),
+                    MailStatus.Read),
+
+                new ReadUnreadMailAction(
+                    RepositoryFactory.Create<MailRepository>(),
+                    MailStatus.Unread),
+
+                new MailFromSenderAction(
+                    RepositoryFactory.Create<MailRepository>(),
+                    RepositoryFactory.Create<UserRepository>()),
             };
 
             actions.SetIndexes();
