@@ -1,4 +1,7 @@
-﻿using Internship_7_EF_Dmail.Domain.Repositories;
+﻿using Internship_7_EF_Dmail.Data.Models;
+using Internship_7_EF_Dmail.Domain.Repositories;
+using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
+using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.InboxActions
@@ -19,7 +22,46 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
         public void Open()
         {
-            string searchPattern = Read("Please enter a mail or a part of an mail to search: ");
+            string query = Read("Please enter the sender address (partial / full): ");
+
+            if(string.IsNullOrEmpty(query))
+            {
+                WriteLine(ERROR_INVALID,Style.Error);
+                WaitForInput();
+                return;
+            }
+
+            ICollection<User> senders = _userRepository.GetEmailContains(query);
+
+            if(!senders.Any())
+            {
+                WriteLine(ERROR_NO_MAILS_WITHIN_CRITERIA, Style.Error);
+                WaitForInput();
+                return;
+            }
+
+            List<Mail> mailsWhereSender = new List<Mail>();
+
+            senders.ForEach<User>((u) =>
+            {
+                mailsWhereSender.AddRange(_mailRepository.GetWhereSender(u.Id));
+            });
+
+            mailsWhereSender.OrderByDescending(m => m.CreatedAt);
+
+            List<Mail> final = mailsWhereSender
+                .Where(m => m.SenderId != AuthAction.GetCurrentlyAuthenticatedUser()!.Id)
+                .ToList();
+
+            if(!mailsWhereSender.Any())
+            {
+                WriteLine(ERROR_NO_MAILS_WITHIN_CRITERIA, Style.Error);
+                WaitForInput();
+                return;
+            }
+
+            WriteMails(final);
+            WaitForInput();
         }
     }
 }

@@ -10,6 +10,7 @@
         public const string ERROR_OPTION_OUT_OF_RANGE = "Option does not exist";
         public const string ERROR_MAIL_DOES_NOT_EXIST = "Mail does not exist.";
         public const string ERROR_UNHANDLED = "An unhandled exception occured.";
+        public const string ERROR_NO_MAILS_WITHIN_CRITERIA = "No mails found within the given search criteria.";
 
         public const string WARN_NO_MAILS = "There are no mails to show.";
         public const string WARN_NO_CHANGES = "No changes have been applied.";
