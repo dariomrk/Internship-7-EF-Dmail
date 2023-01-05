@@ -1,6 +1,7 @@
 ﻿using Internship_7_EF_Dmail.Data.Enums;
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
+using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 
 namespace Internship_7_EF_Dmail.Presentation.Utils
@@ -118,22 +119,20 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static void WriteMails(IList<Mail> mails)
         {
-            WriteLine("Ord. |" +
-                " Title                    |" +
-                " Sender                ");
+            WriteLine("Ord. | Title                                            | Sender");
             if (!mails.Any())
                 return;
             mails.ForEach((m, i) => WriteLine($"{i}    |" +
-                $" {m.Title.Truncate(24).PadRight(24)} |" +
+                $" {m.Title.Truncate(48).PadRight(48)} |" +
                 $" {m.Sender.Email.Truncate(24).PadRight(24)}"));
         }
 
-        public static void WriteInvitedUsers(Mail mail)
+        public static void WriteInvitedUsers(Mail mail,string currentUser)
         {
             WriteLine("Invited users:");
             foreach (Recipient recipient in mail.Recipients)
             {
-                if (recipient.User == null)
+                if (recipient.User == null || recipient.User.Email == currentUser)
                 {
                     Write(" |> ");
                     Write("my response", Style.Emphasis);
@@ -169,7 +168,8 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     $"Event start time: {mail.EventStartAt}\n" +
                     $"Event duration:   {mail.EventDuration!.Value.ToString(@"hh\:mm\:ss")}\n" +
                     $"Sender:           {mail.Sender.Email}");
-                WriteInvitedUsers(mail);
+                WriteInvitedUsers(mail,
+                    AuthAction.GetCurrentlyAuthenticatedUser()!.Email);
                 WriteLine("--- EVENT END ---");
             }
         }

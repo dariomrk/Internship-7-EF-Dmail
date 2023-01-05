@@ -44,11 +44,12 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             return password;
         }
 
-        public static bool GetConfirmation(string message = "")
+        public static bool GetConfirmation(string message = "", bool clear = true)
         {
             while (true)
             {
-                Console.Clear();
+                if(clear)
+                    Console.Clear();
                 if(!string.IsNullOrEmpty(message))
                     WriteLine(message);
                 Write(PROMPT_CONFIRMATION_Y_N);
