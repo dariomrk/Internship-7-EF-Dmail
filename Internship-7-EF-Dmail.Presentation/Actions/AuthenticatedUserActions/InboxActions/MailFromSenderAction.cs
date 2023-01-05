@@ -36,13 +36,6 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             ICollection<User> senders = _userRepository.GetEmailContains(query);
 
-            if(!senders.Any())
-            {
-                WriteLine(ERROR_NO_MAILS_WITHIN_CRITERIA, Style.Error);
-                WaitForInput();
-                return;
-            }
-
             List<Mail> mailsWhereSender = new List<Mail>();
 
             senders.ForEach<User>((u) =>
@@ -56,14 +49,14 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 
-            if(!mailsWhereSender.Any())
+            IList<Mail> final = PromptFilterByFormat(recieved);
+
+            if (!final.Any())
             {
                 WriteLine(ERROR_NO_MAILS_WITHIN_CRITERIA, Style.Error);
                 WaitForInput();
                 return;
             }
-
-            IList<Mail> final = PromptFilterByFormat(recieved);
 
             Console.Clear();
             WriteMails(final);
@@ -74,7 +67,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             }
 
             WriteMail(selected!);
-            WriteLine("Selected mail actions are located on the next screen.", Style.Emphasis);
+            WriteLine("Selected mail actions are located on the next screen.");
             WaitForInput();
             SelectedMailMenuFactory.CreateActions(selected!).WriteActionsAndOpen();
         }

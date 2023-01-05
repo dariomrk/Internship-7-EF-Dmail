@@ -53,19 +53,18 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 .Contains(m.SenderId))
                 .ToList();
 
-            if (!mails.Any())
-            {
-                WriteLine(WARN_NO_MAILS, Style.Warning);
-                WaitForInput();
-                return;
-            }
-
-
             Console.Clear();
 
             IList<Mail> final = PromptFilterByFormat(mails)
                 .OrderByDescending(m => m.CreatedAt)
                 .ToList();
+
+            if (!final.Any())
+            {
+                WriteLine(WARN_NO_MAILS, Style.Warning);
+                WaitForInput();
+                return;
+            }
 
             WriteMails(final);
 
@@ -81,7 +80,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                     AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
                     MailStatus.Read);
             }
-            WriteLine("Selected mail actions are located on the next screen.", Style.Emphasis);
+            WriteLine("Selected mail actions are located on the next screen.");
             WaitForInput();
             SelectedMailMenuFactory.CreateActions(selected!).WriteActionsAndOpen();
         }
