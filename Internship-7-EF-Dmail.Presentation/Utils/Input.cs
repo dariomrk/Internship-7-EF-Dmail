@@ -1,4 +1,5 @@
-﻿using Internship_7_EF_Dmail.Data.Models;
+﻿using Internship_7_EF_Dmail.Data.Enums;
+using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 
@@ -47,6 +48,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         {
             while (true)
             {
+                Console.Clear();
                 if(!string.IsNullOrEmpty(message))
                     WriteLine(message);
                 Write(PROMPT_CONFIRMATION_Y_N);
@@ -149,11 +151,37 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     WaitForInput();
                     continue;
                 }
+
                 Console.Clear();
                 return userInput == 1 ?
                     input.Where(m => m.Format == Data.Enums.MailFormat.Email).ToList()
                     :
                     input.Where(m => m.Format == Data.Enums.MailFormat.Event).ToList();
+            }
+        }
+
+        public static int PromptSelectOption(string message, IList<string> options)
+        {
+            while (true)
+            {
+                WriteLine(message);
+                options.ForEach((option, i) => WriteLine($"{i} - {option}"));
+                Write(PROMPT_SELECT_OPTION);
+
+                if (!int.TryParse(Read(), out int userSelection))
+                {
+                    WriteLine(ERROR_INVALID, Style.Error);
+                    WaitForInput();
+                    continue;
+                }
+
+                if(userSelection < 0 || userSelection >= options.Count)
+                {
+                    WriteLine(ERROR_OPTION_OUT_OF_RANGE, Style.Error);
+                    WaitForInput();
+                    continue;
+                }
+                return userSelection;
             }
         }
     }

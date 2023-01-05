@@ -23,6 +23,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
         public void Open()
         {
+            WriteLine(Name);
+
             string query = Read("Please enter the sender address (partial / full): ");
 
             if(string.IsNullOrEmpty(query))
@@ -49,10 +51,9 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                     AuthAction.GetCurrentlyAuthenticatedUser()!.Id));
             });
 
-            mailsWhereSender.OrderByDescending(m => m.CreatedAt);
-
             List<Mail> recieved = mailsWhereSender
                 .Where(m => m.SenderId != AuthAction.GetCurrentlyAuthenticatedUser()!.Id)
+                .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 
             if(!mailsWhereSender.Any())

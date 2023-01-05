@@ -23,6 +23,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         public void Open()
         {
             Console.Clear();
+            WriteLine(Name);
 
             if(!GetConfirmation("Are you sure you want to delete this mail?"))
             {

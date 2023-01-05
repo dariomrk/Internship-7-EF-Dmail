@@ -12,5 +12,14 @@ namespace Internship_7_EF_Dmail.Data.Models
 
         public MailStatus? MailStatus { get; set; }
         public EventStatus? EventStatus { get; set; }
+
+        public Recipient()
+        {
+        }
+
+        public Recipient(int recipientId)
+        {
+            UserId = recipientId;
+        }
     }
 }

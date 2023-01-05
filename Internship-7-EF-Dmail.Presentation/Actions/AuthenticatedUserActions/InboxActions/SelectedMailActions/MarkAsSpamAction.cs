@@ -23,6 +23,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         public void Open()
         {
             Console.Clear();
+            WriteLine(Name);
 
             Response response = _spamFlagRepository.MarkAsSpam(
                 AuthAction.GetCurrentlyAuthenticatedUser()!.Id,

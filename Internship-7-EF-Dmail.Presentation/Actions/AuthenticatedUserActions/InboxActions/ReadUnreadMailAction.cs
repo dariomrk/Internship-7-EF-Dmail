@@ -35,12 +35,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         public void Open()
         {
             Console.Clear();
-            
+            WriteLine(Name);
+
             IList<Mail> query = _mailRepository
                 .GetWhereRecieverAndStatus(
                 AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
                 _mailStatus)
-                .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 
             IList<SpamFlag> mySpamFlags = _spamFlagRepository
@@ -63,7 +63,9 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             Console.Clear();
 
-            IList<Mail> final = PromptFilterByFormat(mails);
+            IList<Mail> final = PromptFilterByFormat(mails)
+                .OrderByDescending(m => m.CreatedAt)
+                .ToList();
 
             WriteMails(final);
 

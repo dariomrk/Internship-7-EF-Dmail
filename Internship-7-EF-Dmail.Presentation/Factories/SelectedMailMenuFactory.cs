@@ -27,6 +27,10 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
                 new DeleteMailAction(
                     RepositoryFactory.Create<MailRepository>(),
                     selected),
+
+                new ReplyToMailAction(
+                    RepositoryFactory.Create<MailRepository>(),
+                    selected),
             };
 
             actions.SetIndexes();
