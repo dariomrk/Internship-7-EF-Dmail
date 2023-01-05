@@ -173,5 +173,24 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 WriteLine("--- EVENT END ---");
             }
         }
+
+        public static void WriteGenericResponse(Response response)
+        {
+            switch (response)
+            {
+                case Response.Succeeded:
+                    WriteLine(SUCCESS_DONE, Style.Positive);
+                    WaitForInput();
+                    break;
+                case Response.NoChanges:
+                    WriteLine(WARN_NO_CHANGES, Style.Warning);
+                    WaitForInput();
+                    break;
+                default:
+                    WriteLine(ERROR_UNHANDLED, Style.Error);
+                    WaitForInput();
+                    break;
+            }
+        }
     }
 }

@@ -125,15 +125,15 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         public static IList<Mail> PromptFilterByFormat(ICollection<Mail> input)
         {
             Console.Clear();
-            if(!GetConfirmation("Do you want to filter by mail format?"))
+            if(!GetConfirmation("Do you want to filter mail by format as well?"))
             {
                 Console.Clear();
                 return input.ToList();
             }
 
-            Console.Clear();
             while (true)
             {
+                Console.Clear();
                 Write("Press 1 to filter emails, 2 to filter events: ");
 
                 if(!int.TryParse(Read(),out int userInput))
@@ -154,7 +154,6 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     input.Where(m => m.Format == Data.Enums.MailFormat.Email).ToList()
                     :
                     input.Where(m => m.Format == Data.Enums.MailFormat.Event).ToList();
-
             }
         }
     }

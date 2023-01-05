@@ -32,8 +32,19 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             throw new NotSupportedException();
         }
 
+        public bool SpamFlagExists(int userId, int userToFlag)
+        {
+            return GetAll().Any(sf => sf.UserId == userId && sf.FlaggedUserId == userToFlag);
+        }
+
         public Response MarkAsSpam(int userId, int userToFlag)
         {
+
+            if(SpamFlagExists(userId,userToFlag))
+            {
+                return Response.NoChanges;
+            }
+
             context.SpamFlags.Add(new SpamFlag()
             {
                 UserId = userId,
