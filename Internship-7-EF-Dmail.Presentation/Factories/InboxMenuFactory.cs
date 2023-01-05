@@ -4,13 +4,13 @@ using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Factories
 {
-    public class AuthenticatedUserMainMenuFactory
+    public class InboxMenuFactory
     {
         public static IList<IAction> CreateActions()
         {
             var actions = new List<IAction>()
             {
-                new LogoutAction(),
+                new ExitMenuAction(),
             };
 
             actions.SetIndexes();

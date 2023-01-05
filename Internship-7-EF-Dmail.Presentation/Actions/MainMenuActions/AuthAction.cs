@@ -81,7 +81,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
             WaitForInput();
 
             Console.Clear();
-            AuthenticatedUserMainMenuFactory
+            AuthenticatedUserMenuFactory
                 .CreateActions()
                 .WriteActionsAndOpen();
         }
