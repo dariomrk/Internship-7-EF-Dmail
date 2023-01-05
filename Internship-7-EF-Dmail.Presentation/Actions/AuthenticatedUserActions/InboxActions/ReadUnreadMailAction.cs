@@ -2,6 +2,8 @@
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
+using Internship_7_EF_Dmail.Presentation.Extensions;
+using Internship_7_EF_Dmail.Presentation.Factories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.InboxActions
@@ -43,8 +45,25 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 return;
             }
 
+
+            Console.Clear();
             WriteMails(mails);
+
+            if (!TrySelectMailByIndex(mails, out Mail? selected))
+            {
+                return;
+            }
+
+            WriteMail(selected!);
+            if(_mailStatus == MailStatus.Unread)
+            {
+                _mailRepository.UpdateMailStatus(selected!.Id,
+                    AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
+                    MailStatus.Read);
+            }
+            WriteLine("Selected mail actions are located on the next screen.", Style.Emphasis);
             WaitForInput();
+            SelectedMailMenuFactory.CreateActions(selected!).WriteActionsAndOpen();
         }
     }
 }

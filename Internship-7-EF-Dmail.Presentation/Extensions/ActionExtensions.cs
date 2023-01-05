@@ -15,14 +15,13 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
             actions.ForEach((action) => WriteLine($"{action.Index} - {action.Name}"));
         }
 
-        public static void WriteActionsAndOpen(this IList<IAction> actions, bool clear = true)
+        public static void WriteActionsAndOpen(this IList<IAction> actions)
         {
             bool isExitSelected = false;
 
             do
             {
-                if (clear)
-                    Console.Clear();
+                Console.Clear();
 
                 actions.WriteActions();
                 Write(PROMPT_SELECT_OPTION);
