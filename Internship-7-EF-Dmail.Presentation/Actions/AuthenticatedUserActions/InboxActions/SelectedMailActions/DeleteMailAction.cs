@@ -6,28 +6,33 @@ using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.InboxActions.SelectedMailActions
 {
-    public class MarkAsUnreadAction : IAction
+    public class DeleteMailAction : IAction
     {
         private readonly MailRepository _mailRepository;
-        private Mail _selected;
+        private readonly Mail _selected;
 
-        public MarkAsUnreadAction(MailRepository mailRepository, Mail selectedMail)
+        public DeleteMailAction(MailRepository mailRepository, Mail selected)
         {
             _mailRepository=mailRepository;
-            _selected=selectedMail;
+            _selected=selected;
         }
 
         public int Index { get; set; }
-        public string Name => "Mark as unread";
+        public string Name => "Delete mail";
 
         public void Open()
         {
             Console.Clear();
 
-            Response response = _mailRepository.UpdateMailStatus(
-                _selected.Id,
-                AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
-                Data.Enums.MailStatus.Unread);
+            if(!GetConfirmation("Are you sure you want to delete this mail?"))
+            {
+                WriteLine(OTHER_CANCELLED, Style.Emphasis);
+                WaitForInput();
+                return;
+            }
+
+            Response response = _mailRepository.RemoveFromInbox(_selected.Id,
+                AuthAction.GetCurrentlyAuthenticatedUser()!.Id);
 
             WriteGenericResponse(response);
         }

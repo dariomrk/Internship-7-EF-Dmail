@@ -45,7 +45,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             senders.ForEach<User>((u) =>
             {
-                mailsWhereSender.AddRange(_mailRepository.GetWhereSender(u.Id));
+                mailsWhereSender.AddRange(_mailRepository.GetWhereSenderAndRecipient(u.Id,
+                    AuthAction.GetCurrentlyAuthenticatedUser()!.Id));
             });
 
             mailsWhereSender.OrderByDescending(m => m.CreatedAt);

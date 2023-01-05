@@ -23,6 +23,10 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
                 new MarkAsSpamAction(
                     RepositoryFactory.Create<SpamFlagRepository>(),
                     selected),
+
+                new DeleteMailAction(
+                    RepositoryFactory.Create<MailRepository>(),
+                    selected),
             };
 
             actions.SetIndexes();

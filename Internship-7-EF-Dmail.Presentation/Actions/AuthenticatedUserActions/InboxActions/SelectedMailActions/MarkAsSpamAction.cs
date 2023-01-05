@@ -9,12 +9,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     public class MarkAsSpamAction : IAction
     {
         private readonly SpamFlagRepository _spamFlagRepository;
-        private readonly Mail _mail;
+        private readonly Mail _selected;
 
         public MarkAsSpamAction(SpamFlagRepository spamFlagRepository, Mail mail)
         {
             _spamFlagRepository=spamFlagRepository;
-            _mail=mail;
+            _selected=mail;
         }
 
         public int Index { get; set; }
@@ -26,7 +26,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             Response response = _spamFlagRepository.MarkAsSpam(
                 AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
-                _mail.SenderId);
+                _selected.SenderId);
 
             WriteGenericResponse(response);
         }

@@ -22,6 +22,14 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
         public ICollection<Mail> GetWhereSender(int senderId) => GetAll().Where(m => m.SenderId == senderId).ToList();
 
+        public ICollection<Mail> GetWhereSenderAndRecipient(int senderId, int recipientId) => GetWhereSender(senderId)
+            .Join(GetWhereReciever(recipientId),
+            s => s.Id,
+            r => r.Id,
+            (s,r) => new {s,r})
+            .Select(a => a.r)
+            .ToList();
+
         public ICollection<Mail> GetWhereReciever(int recieverId) => GetAll()
             .Join(context.Recipients,
             m => m.Id,
