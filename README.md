@@ -13,4 +13,15 @@ Main focus on Entity Framework, Postgres, LINQ and design patterns.
    - Run `Update-Database` in the Package Manager Console.
 
 ## Database diagram
-<!-- ![dbdiagram](./Assets/dbdiagram.png) -->
+![database diagram](./dbDiagram.png)
+
+## Seed data
+
+**Login info:**
+
+| Username                 | Password                 |
+| ------------------------ | ------------------------ |
+| `administrator@dmail.hr` | `administrator-password` |
+| `user@dmail.hr`          | `user-password`          |
+| `dario@dmail.hr`         | `password`               |
+  
