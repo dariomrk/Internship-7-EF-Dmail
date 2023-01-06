@@ -27,9 +27,11 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 
             IList<Mail> sentMails = _mailRepository
                 .GetWhereSender(_authenticatedUser.Id)
+                .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 
-            WriteMails(sentMails);
+            WriteSentMails(sentMails, _mailRepository);
+
             if(!TrySelectMailByIndex(sentMails, out Mail? selected))
             {
                 return;

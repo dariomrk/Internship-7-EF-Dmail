@@ -64,14 +64,14 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             }
 
             Console.Clear();
-            WriteMails(final);
+            WriteRecievedMails(final);
             
             if(!TrySelectMailByIndex(final, out Mail? selected))
             {
                 return;
             }
 
-            WriteMail(selected!, _authenticatedUser);
+            WriteRecievedMail(selected!, _authenticatedUser);
             WriteLine("Selected mail actions are located on the next screen.");
             WaitForInput();
             SelectedMailMenuFactory.CreateActions(selected!).WriteActionsAndOpen();

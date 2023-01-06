@@ -1,6 +1,7 @@
 ﻿using Internship_7_EF_Dmail.Data.Enums;
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
+using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 
@@ -117,7 +118,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             Console.ResetColor();
         }
 
-        public static void WriteMails(IList<Mail> mails)
+        public static void WriteRecievedMails(IList<Mail> mails)
         {
             WriteLine("Ord. | Title                                            | Sender");
             if (!mails.Any())
@@ -127,7 +128,27 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 $" {m.Sender.Email.Truncate(24).PadRight(24)}"));
         }
 
-        public static void WriteInvitedUsers(Mail mail,string currentUser)
+        public static void WriteSentMails(IList<Mail> mails, MailRepository mailRepository)
+        {
+            WriteLine("Ord. | Title                                            | Recipient");
+            if (!mails.Any())
+                return;
+            mails.ForEach((m, i) => WriteLine($"{i}    |" +
+                $" {m.Title.Truncate(48).PadRight(48)} | " +
+                GetRecipientsEmails(mailRepository
+                .GetRecipients(m.Id)
+                .Select(m => m.Email)
+                .ToList()).Truncate(24).PadRight(24)));
+        }
+
+        public static string GetRecipientsEmails(IList<string> recipients)
+        {
+            if (recipients.Count > 1)
+                return "multiple recipients";
+            return recipients.FirstOrDefault("no recipients");
+        }
+
+        public static void WriteInvitedUsers(Mail mail, string currentUser)
         {
             WriteLine("Invited users:");
             foreach (Recipient recipient in mail.Recipients)
@@ -147,7 +168,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             }
         }
 
-        public static void WriteMail(Mail mail, User sender)
+        public static void WriteRecievedMail(Mail mail, User sender)
         {
             Console.Clear();
             if (mail.Format == MailFormat.Email)

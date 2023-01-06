@@ -69,14 +69,14 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 return;
             }
 
-            WriteMails(final);
+            WriteRecievedMails(final);
 
             if (!TrySelectMailByIndex(final, out Mail? selected))
             {
                 return;
             }
 
-            WriteMail(selected!, _authenticatedUser);
+            WriteRecievedMail(selected!, _authenticatedUser);
             if(_mailStatus == MailStatus.Unread)
             {
                 _mailRepository.UpdateMailStatus(selected!.Id,
