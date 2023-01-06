@@ -6,13 +6,13 @@ using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 {
-    public class SendNewMailAction : IAction
+    public class SendNewEventAction : IAction
     {
         private readonly MailRepository _mailRepository;
         private readonly UserRepository _userRepository;
         private readonly User _authenticatedUser;
 
-        public SendNewMailAction(
+        public SendNewEventAction(
             MailRepository mailRepository,
             UserRepository userRepository,
             User authenticatedUser)
@@ -23,7 +23,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
         }
 
         public int Index { get; set; }
-        public string Name => "New mail";
+        public string Name => "New event";
 
         public void Open()
         {
@@ -33,12 +33,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
             Mail newMail = new Mail()
             {
                 SenderId = _authenticatedUser.Id,
-                Format = Data.Enums.MailFormat.Email,
+                Format = Data.Enums.MailFormat.Event,
             };
 
             IList<string>? userInput = ReadRecipients();
 
-            if(userInput == null)
+            if (userInput == null)
             {
                 WriteLine(ERROR_INVALID, Style.Error);
                 WaitForInput();
@@ -56,7 +56,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
             userInput.ForEach((ui) => {
                 User toAdd = _userRepository.GetByEmail(ui);
 
-                if(toAdd != null && !recipientsUsers.Contains(toAdd))
+                if (toAdd != null && !recipientsUsers.Contains(toAdd))
                     recipientsUsers.Add(toAdd);
             });
 
@@ -68,12 +68,28 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
             }
 
             newMail.Title = ReadWithFallback(PROMPT_MAIL_TITLE, "No title");
-            newMail.Content = ReadWithFallback(PROMPT_MAIL_CONTENT, "No content.");
+            newMail.EventStartAt = ReadDateTime(PROMPT_DATETIME);
+
+            if(newMail.EventStartAt == null)
+            {
+                return;
+            }
+
+            newMail.EventDuration = ReadTimeSpan(PROMPT_TIMESPAN);
+
+            if (newMail.EventDuration == null)
+            {
+                return;
+            }
+
             newMail.Recipients = new List<Recipient>();
 
             recipientsUsers.ForEach((u) =>
             {
-                newMail.Recipients.Add(new Recipient(u.Id));
+                newMail.Recipients.Add(new Recipient(u.Id)
+                {
+                    EventStatus = Data.Enums.EventStatus.NoResponse,
+                });
             });
 
             Response response = _mailRepository.Add(newMail);

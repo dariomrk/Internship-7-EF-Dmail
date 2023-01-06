@@ -13,6 +13,7 @@
         public const string ERROR_NO_MAILS_WITHIN_CRITERIA = "No mails found within the given search criteria.";
 
         public const string WARN_NO_CHANGES = "No changes have been applied.";
+        public const string WARN_CANNOT_MAIL_SELF = "You cannot send a mail to yourself!";
 
         public const string SUCCESS_DONE = "Done.";
 
@@ -27,5 +28,8 @@
         public const string PROMPT_PASSWORD = "Please enter the password: ";
         public const string PROMPT_MAIL_TITLE = "Please enter the mail title: ";
         public const string PROMPT_MAIL_CONTENT = "Please enter the mail content: ";
+        public const string PROMPT_DATETIME = "Please enter the time and date in the following format [15 September 2008 09:30:41]: ";
+        public const string PROMPT_TIMESPAN = "Please enter the duration in the following format [09:30:41]: ";
+
     }
 }

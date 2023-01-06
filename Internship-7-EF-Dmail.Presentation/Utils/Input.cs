@@ -194,5 +194,19 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             return userInputSplit;
         }
+
+        public static DateTime? ReadDateTime(string prompt)
+        {
+            if(!DateTime.TryParse(Read(prompt), out DateTime dateTime))
+                return null;
+            return dateTime.ToUniversalTime();
+        }
+
+        public static TimeSpan? ReadTimeSpan(string prompt)
+        {
+            if (!TimeSpan.TryParse(Read(prompt), out TimeSpan timeSpan))
+                return null;
+            return timeSpan;
+        }
     }
 }

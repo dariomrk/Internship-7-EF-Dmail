@@ -26,6 +26,11 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
                     RepositoryFactory.Create<MailRepository>(),
                     RepositoryFactory.Create<UserRepository>(),
                     AuthAction.GetCurrentlyAuthenticatedUser()!),
+
+                new SendNewEventAction(
+                    RepositoryFactory.Create<MailRepository>(),
+                    RepositoryFactory.Create<UserRepository>(),
+                    AuthAction.GetCurrentlyAuthenticatedUser()!),
             };
 
             actions.SetIndexes();
