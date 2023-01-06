@@ -198,14 +198,31 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         public static DateTime? ReadDateTime(string prompt)
         {
             if(!DateTime.TryParse(Read(prompt), out DateTime dateTime))
+            {
+                WriteLine(ERROR_INVALID,Style.Error);
+                WaitForInput();
                 return null;
+            }
+
             return dateTime.ToUniversalTime();
         }
 
         public static TimeSpan? ReadTimeSpan(string prompt)
         {
             if (!TimeSpan.TryParse(Read(prompt), out TimeSpan timeSpan))
+            {
+                WriteLine(ERROR_INVALID, Style.Error);
+                WaitForInput();
                 return null;
+            }
+
+            if (timeSpan < TimeSpan.Zero)
+            {
+                WriteLine("Duration cannot be 0.", Style.Error);
+                WaitForInput();
+                return null;
+            }
+
             return timeSpan;
         }
     }
