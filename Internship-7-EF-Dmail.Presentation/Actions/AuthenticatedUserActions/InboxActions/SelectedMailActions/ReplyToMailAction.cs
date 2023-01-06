@@ -47,12 +47,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                     newMail.Content = $"{AuthAction.GetCurrentlyAuthenticatedUser()!.Email} " +
                             $"has responded to the event titled: {_selected.Title}.";
 
-                    int eventResponse = PromptSelectOption("Your response: ",
+                    int eventResponse = PromptSelectOption(
                         new List<string>()
                         {
                             "Accept",
                             "Reject",
-                        });
+                        }, "Your response: ");
 
                     _mailRepository.UpdateEventStatus(_selected.Id,
                         AuthAction.GetCurrentlyAuthenticatedUser()!.Id,

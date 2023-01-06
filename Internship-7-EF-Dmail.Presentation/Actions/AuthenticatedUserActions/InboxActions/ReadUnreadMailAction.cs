@@ -61,7 +61,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             if (!final.Any())
             {
-                WriteLine(WARN_NO_MAILS, Style.Warning);
+                WriteLine(OTHER_NO_MAILS);
                 WaitForInput();
                 return;
             }

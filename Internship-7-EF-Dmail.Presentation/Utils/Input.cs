@@ -48,9 +48,9 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         {
             while (true)
             {
-                if(clear)
+                if (clear)
                     Console.Clear();
-                if(!string.IsNullOrEmpty(message))
+                if (!string.IsNullOrEmpty(message))
                     WriteLine(message);
                 Write(PROMPT_CONFIRMATION_Y_N);
                 string input = Read().ToLower();
@@ -100,7 +100,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             if (!mails.Any())
             {
-                WriteLine(WARN_NO_MAILS, Style.Warning);
+                WriteLine(OTHER_NO_MAILS, Style.Warning);
                 WaitForInput();
                 return false;
             }
@@ -128,44 +128,31 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         public static IList<Mail> PromptFilterByFormat(ICollection<Mail> input)
         {
             Console.Clear();
-            if(!GetConfirmation("Do you want to filter mail by format as well?"))
+            if (!GetConfirmation("Do you want to filter mail by format as well?"))
             {
                 Console.Clear();
                 return input.ToList();
             }
 
-            while (true)
+            List<string> options = new List<string>()
             {
-                Console.Clear();
-                Write("Press 1 to filter emails, 2 to filter events: ");
+                "Retrieve emails",
+                "Retrieve events",
+            };
 
-                if(!int.TryParse(Read(),out int userInput))
-                {
-                    WriteLine(ERROR_INVALID,Style.Error);
-                    WaitForInput();
-                    continue;
-                }
-
-                if(userInput != 1 && userInput != 2)
-                {
-                    WriteLine(ERROR_OPTION_OUT_OF_RANGE, Style.Error);
-                    WaitForInput();
-                    continue;
-                }
-
-                Console.Clear();
-                return userInput == 1 ?
-                    input.Where(m => m.Format == Data.Enums.MailFormat.Email).ToList()
-                    :
-                    input.Where(m => m.Format == Data.Enums.MailFormat.Event).ToList();
-            }
+            Console.Clear();
+            return PromptSelectOption(options) == 0 ?
+                input.Where(m => m.Format == Data.Enums.MailFormat.Email).ToList()
+                :
+                input.Where(m => m.Format == Data.Enums.MailFormat.Event).ToList();
         }
 
-        public static int PromptSelectOption(string message, IList<string> options)
+        public static int PromptSelectOption(IList<string> options, string message = "")
         {
             while (true)
             {
-                WriteLine(message);
+                if(!string.IsNullOrEmpty(message))
+                    WriteLine(message);
                 options.ForEach((option, i) => WriteLine($"{i} - {option}"));
                 Write(PROMPT_SELECT_OPTION);
 
@@ -176,7 +163,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     continue;
                 }
 
-                if(userSelection < 0 || userSelection >= options.Count)
+                if (userSelection < 0 || userSelection >= options.Count)
                 {
                     WriteLine(ERROR_OPTION_OUT_OF_RANGE, Style.Error);
                     WaitForInput();
