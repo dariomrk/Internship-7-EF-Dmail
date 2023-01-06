@@ -18,7 +18,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
 
                 new InboxMenuActions(),
 
-                new OutboxAction(
+                new OutboxMenuAction(
                     RepositoryFactory.Create<MailRepository>(),
                     AuthAction.GetCurrentlyAuthenticatedUser()!),
             };

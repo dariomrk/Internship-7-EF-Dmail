@@ -6,12 +6,12 @@ using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 {
-    public class OutboxAction : IAction
+    public class OutboxMenuAction : IAction
     {
         private readonly MailRepository _mailRepository;
         private readonly User _authenticatedUser;
 
-        public OutboxAction(MailRepository mailRepository, User authenticatedUser)
+        public OutboxMenuAction(MailRepository mailRepository, User authenticatedUser)
         {
             _mailRepository=mailRepository;
             _authenticatedUser=authenticatedUser;
