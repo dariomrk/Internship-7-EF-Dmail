@@ -3,6 +3,7 @@ using Internship_7_EF_Dmail.Domain.Factories;
 using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Actions;
 using Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.InboxActions.SelectedMailActions;
+using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
@@ -18,19 +19,24 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
 
                 new MarkAsUnreadAction(
                     RepositoryFactory.Create<MailRepository>(),
-                    selected),
+                    selected,
+                    AuthAction.GetCurrentlyAuthenticatedUser()!
+                    ),
 
                 new MarkAsSpamAction(
                     RepositoryFactory.Create<SpamFlagRepository>(),
-                    selected),
+                    selected,
+                    AuthAction.GetCurrentlyAuthenticatedUser()!),
 
                 new DeleteMailAction(
                     RepositoryFactory.Create<MailRepository>(),
-                    selected),
+                    selected,
+                    AuthAction.GetCurrentlyAuthenticatedUser()!),
 
                 new ReplyToMailAction(
                     RepositoryFactory.Create<MailRepository>(),
-                    selected),
+                    selected,
+                    AuthAction.GetCurrentlyAuthenticatedUser()!),
             };
 
             actions.SetIndexes();

@@ -136,12 +136,12 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
             List<string> options = new List<string>()
             {
-                "Retrieve emails",
-                "Retrieve events",
+                "Emails only",
+                "Events only",
             };
 
             Console.Clear();
-            return PromptSelectOption(options) == 0 ?
+            return PromptSelectOption(options,"Filter") == 0 ?
                 input.Where(m => m.Format == Data.Enums.MailFormat.Email).ToList()
                 :
                 input.Where(m => m.Format == Data.Enums.MailFormat.Event).ToList();
