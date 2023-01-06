@@ -36,7 +36,6 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
         public int Index { get; set; }
         public string Name => "Authenticate";
 
-
         public void Open()
         {
             Console.Clear();

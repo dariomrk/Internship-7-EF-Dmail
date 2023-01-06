@@ -105,19 +105,15 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 return false;
             }
 
-            Write("Input the index of the mail you want to select: ");
+            Write("Input the index of the mail you want to select or any other input to cancel: ");
 
             if (!int.TryParse(Read(), out int userInput))
             {
-                WriteLine(ERROR_INVALID, Style.Error);
-                WaitForInput();
                 return false;
             }
 
             if (userInput < 0 || userInput > mails.Count())
             {
-                WriteLine(ERROR_MAIL_DOES_NOT_EXIST, Style.Error);
-                WaitForInput();
                 return false;
             }
 
