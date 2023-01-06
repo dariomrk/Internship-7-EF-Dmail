@@ -11,6 +11,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         private readonly MailRepository _mailRepository;
         private Mail _selected;
 
+        // TODO Add AuthenticatedUser (dependency injection)
         public MarkAsUnreadAction(MailRepository mailRepository, Mail selectedMail)
         {
             _mailRepository=mailRepository;

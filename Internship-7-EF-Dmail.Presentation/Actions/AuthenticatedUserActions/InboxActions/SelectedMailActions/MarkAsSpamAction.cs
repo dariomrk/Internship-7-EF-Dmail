@@ -11,6 +11,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         private readonly SpamFlagRepository _spamFlagRepository;
         private readonly Mail _selected;
 
+        // TODO Add AuthenticatedUser (dependency injection)
         public MarkAsSpamAction(SpamFlagRepository spamFlagRepository, Mail mail)
         {
             _spamFlagRepository=spamFlagRepository;

@@ -12,6 +12,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         private readonly MailRepository _mailRepository;
         private readonly UserRepository _userRepository;
 
+        // TODO Add AuthenticatedUser (dependency injection)
         public MailFromSenderAction(MailRepository mailRepository, UserRepository userRepository)
         {
             _mailRepository = mailRepository;

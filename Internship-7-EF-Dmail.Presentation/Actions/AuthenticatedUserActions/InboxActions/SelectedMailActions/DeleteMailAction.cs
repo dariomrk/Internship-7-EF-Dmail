@@ -11,6 +11,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
         private readonly MailRepository _mailRepository;
         private readonly Mail _selected;
 
+        // TODO Add AuthenticatedUser (dependency injection)
         public DeleteMailAction(MailRepository mailRepository, Mail selected)
         {
             _mailRepository=mailRepository;

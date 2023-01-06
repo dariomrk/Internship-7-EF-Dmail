@@ -13,7 +13,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
             {
                 new LogoutAction(),
                 new InboxMenuActions(),
-                new OutboxMenuAction(),
+                new OutboxMenuActions(),
             };
 
             actions.SetIndexes();
