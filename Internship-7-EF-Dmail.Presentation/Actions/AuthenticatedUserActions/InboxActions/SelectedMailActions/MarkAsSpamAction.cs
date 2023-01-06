@@ -10,12 +10,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     {
         private readonly SpamFlagRepository _spamFlagRepository;
         private readonly Mail _selected;
+        private readonly User _authenticatedUser;
 
-        // TODO Add AuthenticatedUser (dependency injection)
-        public MarkAsSpamAction(SpamFlagRepository spamFlagRepository, Mail mail)
+        public MarkAsSpamAction(
+            SpamFlagRepository spamFlagRepository,
+            Mail mail,
+            User authenticatedUser)
         {
             _spamFlagRepository=spamFlagRepository;
             _selected=mail;
+            _authenticatedUser=authenticatedUser;
         }
 
         public int Index { get; set; }
@@ -27,7 +31,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             WriteLine(Name);
 
             Response response = _spamFlagRepository.MarkAsSpam(
-                AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
+                _authenticatedUser.Id,
                 _selected.SenderId);
 
             WriteGenericResponse(response);

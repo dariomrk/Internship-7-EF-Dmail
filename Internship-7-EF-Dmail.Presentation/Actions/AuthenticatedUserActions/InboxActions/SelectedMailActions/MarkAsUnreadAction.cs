@@ -10,12 +10,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     {
         private readonly MailRepository _mailRepository;
         private Mail _selected;
+        private readonly User _authenticatedUser;
 
-        // TODO Add AuthenticatedUser (dependency injection)
-        public MarkAsUnreadAction(MailRepository mailRepository, Mail selectedMail)
+        public MarkAsUnreadAction(
+            MailRepository mailRepository,
+            Mail selectedMail,
+            User authenticatedUser)
         {
             _mailRepository=mailRepository;
             _selected=selectedMail;
+            _authenticatedUser=authenticatedUser;
         }
 
         public int Index { get; set; }
@@ -28,7 +32,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             Response response = _mailRepository.UpdateMailStatus(
                 _selected.Id,
-                AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
+                _authenticatedUser.Id,
                 Data.Enums.MailStatus.Unread);
 
             WriteGenericResponse(response);

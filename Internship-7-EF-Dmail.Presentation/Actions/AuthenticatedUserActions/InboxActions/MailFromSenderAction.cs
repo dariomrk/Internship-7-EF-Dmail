@@ -11,12 +11,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     {
         private readonly MailRepository _mailRepository;
         private readonly UserRepository _userRepository;
+        private readonly User _authenticatedUser;
 
-        // TODO Add AuthenticatedUser (dependency injection)
-        public MailFromSenderAction(MailRepository mailRepository, UserRepository userRepository)
+        public MailFromSenderAction(
+            MailRepository mailRepository,
+            UserRepository userRepository,
+            User authenticatedUser)
         {
             _mailRepository = mailRepository;
             _userRepository = userRepository;
+            _authenticatedUser = authenticatedUser;
         }
 
         public int Index { get; set; }
@@ -42,11 +46,11 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             senders.ForEach<User>((u) =>
             {
                 mailsWhereSender.AddRange(_mailRepository.GetWhereSenderAndRecipient(u.Id,
-                    AuthAction.GetCurrentlyAuthenticatedUser()!.Id));
+                    _authenticatedUser.Id));
             });
 
             List<Mail> recieved = mailsWhereSender
-                .Where(m => m.SenderId != AuthAction.GetCurrentlyAuthenticatedUser()!.Id)
+                .Where(m => m.SenderId != _authenticatedUser.Id)
                 .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 

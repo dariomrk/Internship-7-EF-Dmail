@@ -10,12 +10,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     {
         private readonly MailRepository _mailRepository;
         private readonly Mail _selected;
+        private readonly User _authenticatedUser;
 
-        // TODO Add AuthenticatedUser (dependency injection)
-        public DeleteMailAction(MailRepository mailRepository, Mail selected)
+        public DeleteMailAction(
+            MailRepository mailRepository,
+            Mail selected,
+            User authenticatedUser)
         {
             _mailRepository=mailRepository;
             _selected=selected;
+            _authenticatedUser=authenticatedUser;
         }
 
         public int Index { get; set; }
@@ -36,7 +40,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             }
 
             Response response = _mailRepository.RemoveFromInbox(_selected.Id,
-                AuthAction.GetCurrentlyAuthenticatedUser()!.Id);
+                _authenticatedUser.Id);
 
             WriteGenericResponse(response);
         }

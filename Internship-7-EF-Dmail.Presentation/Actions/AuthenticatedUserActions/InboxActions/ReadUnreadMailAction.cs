@@ -12,13 +12,14 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     {
         private readonly MailRepository _mailRepository;
         private readonly SpamFlagRepository _spamFlagRepository;
-        private MailStatus _mailStatus;
+        private readonly MailStatus _mailStatus;
+        private readonly User _authenticatedUser;
 
-        // TODO Add AuthenticatedUser (dependency injection)
         public ReadUnreadMailAction(
             MailRepository mailRepository,
             SpamFlagRepository spamFlagRepository,
-            MailStatus mailStatus)
+            MailStatus mailStatus,
+            User authenticatedUser)
         {
             Name = mailStatus switch
             {
@@ -29,6 +30,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             _mailRepository=mailRepository;
             _spamFlagRepository=spamFlagRepository;
             _mailStatus=mailStatus;
+            _authenticatedUser=authenticatedUser;
         }
         public string Name { get; }
         public int Index { get; set; }
@@ -40,12 +42,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             IList<Mail> query = _mailRepository
                 .GetWhereRecieverAndStatus(
-                AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
+                _authenticatedUser.Id,
                 _mailStatus)
                 .ToList();
 
             IList<SpamFlag> mySpamFlags = _spamFlagRepository
-                .GetSpamFlagsForUser(AuthAction.GetCurrentlyAuthenticatedUser()!.Id)
+                .GetSpamFlagsForUser(_authenticatedUser.Id)
                 .ToList();
 
             IList<Mail> mails = query
@@ -78,7 +80,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             if(_mailStatus == MailStatus.Unread)
             {
                 _mailRepository.UpdateMailStatus(selected!.Id,
-                    AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
+                    _authenticatedUser.Id,
                     MailStatus.Read);
             }
             WriteLine("Selected mail actions are located on the next screen.");

@@ -147,7 +147,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             }
         }
 
-        public static void WriteMail(Mail mail)
+        public static void WriteMail(Mail mail, User sender)
         {
             Console.Clear();
             if (mail.Format == MailFormat.Email)
@@ -169,7 +169,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     $"Event duration:   {mail.EventDuration!.Value.ToString(@"hh\:mm\:ss")}\n" +
                     $"Sender:           {mail.Sender.Email}");
                 WriteInvitedUsers(mail,
-                    AuthAction.GetCurrentlyAuthenticatedUser()!.Email);
+                    sender.Email);
                 WriteLine("--- EVENT END ---");
             }
         }

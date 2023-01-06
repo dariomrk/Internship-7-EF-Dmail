@@ -10,12 +10,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
     {
         private readonly MailRepository _mailRepository;
         private readonly Mail _selected;
+        private readonly User _authenticatedUser;
 
-        // TODO Add AuthenticatedUser (dependency injection)
-        public ReplyToMailAction(MailRepository mailRepository, Mail selected)
+        public ReplyToMailAction(
+            MailRepository mailRepository,
+            Mail selected,
+            User authenticatedUser)
         {
             _mailRepository=mailRepository;
             _selected=selected;
+            _authenticatedUser=authenticatedUser;
         }
 
         public int Index { get; set; }
@@ -28,7 +32,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             Mail newMail = new Mail()
             {
-                SenderId = AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
+                SenderId = _authenticatedUser.Id,
                 Format = Data.Enums.MailFormat.Email,
                 Recipients = new List<Recipient>()
                 {
@@ -45,7 +49,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
                 case Data.Enums.MailFormat.Event:
                     newMail.Title = $"[Response][{_selected.Title}]";
-                    newMail.Content = $"{AuthAction.GetCurrentlyAuthenticatedUser()!.Email} " +
+                    newMail.Content = $"{_authenticatedUser.Email} " +
                             $"has responded to the event titled: {_selected.Title}.";
 
                     int eventResponse = PromptSelectOption(
@@ -56,7 +60,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                         }, "Your response: ");
 
                     _mailRepository.UpdateEventStatus(_selected.Id,
-                        AuthAction.GetCurrentlyAuthenticatedUser()!.Id,
+                        _authenticatedUser.Id,
                         eventResponse == 0 ? Data.Enums.EventStatus.Accepted
                         : Data.Enums.EventStatus.Rejected);
 
