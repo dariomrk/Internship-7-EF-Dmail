@@ -23,6 +23,9 @@
         public const string PROMPT_CONFIRMATION_Y_N = "Input Y (yes) to confirm or N (no) to cancel: ";
         public const string PROMPT_SELECT_OPTION = "Select one of the provided options: ";
         public const string PROMPT_EMAIL = "Please enter an email: ";
+        public const string PROMPT_EMAILS = "Please enter an email or multiple emails separated with a comma: ";
         public const string PROMPT_PASSWORD = "Please enter the password: ";
+        public const string PROMPT_MAIL_TITLE = "Please enter the mail title: ";
+        public const string PROMPT_MAIL_CONTENT = "Please enter the mail content: ";
     }
 }

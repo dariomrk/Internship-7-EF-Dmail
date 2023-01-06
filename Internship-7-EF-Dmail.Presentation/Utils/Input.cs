@@ -137,7 +137,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             };
 
             Console.Clear();
-            return PromptSelectOption(options,"Filter") == 0 ?
+            return PromptSelectOption(options, "Filter") == 0 ?
                 input.Where(m => m.Format == Data.Enums.MailFormat.Email).ToList()
                 :
                 input.Where(m => m.Format == Data.Enums.MailFormat.Event).ToList();
@@ -147,7 +147,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         {
             while (true)
             {
-                if(!string.IsNullOrEmpty(message))
+                if (!string.IsNullOrEmpty(message))
                     WriteLine(message);
                 options.ForEach((option, i) => WriteLine($"{i} - {option}"));
                 Write(PROMPT_SELECT_OPTION);
@@ -167,6 +167,32 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 }
                 return userSelection;
             }
+        }
+
+        public static string ReadWithFallback(string prompt, string fallbackValue)
+        {
+            string input = Read(prompt);
+
+            if (string.IsNullOrWhiteSpace(input))
+                return fallbackValue;
+            return input;
+        }
+
+        public static IList<string>? ReadRecipients()
+        {
+            string userInput = Read(PROMPT_EMAILS);
+
+            if (string.IsNullOrWhiteSpace(userInput))
+            {
+                return null;
+            }
+
+            IList<string> userInputSplit = userInput.Split(',').ToList();
+
+            for (int i = 0; i<userInputSplit.Count; i++)
+                userInputSplit[i] = userInputSplit[i].ToLower().Trim();
+
+            return userInputSplit;
         }
     }
 }

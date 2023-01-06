@@ -21,6 +21,11 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
                 new OutboxMenuAction(
                     RepositoryFactory.Create<MailRepository>(),
                     AuthAction.GetCurrentlyAuthenticatedUser()!),
+
+                new SendNewMailAction(
+                    RepositoryFactory.Create<MailRepository>(),
+                    RepositoryFactory.Create<UserRepository>(),
+                    AuthAction.GetCurrentlyAuthenticatedUser()!),
             };
 
             actions.SetIndexes();
