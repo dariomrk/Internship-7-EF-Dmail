@@ -12,12 +12,13 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
         public UserRepository(DmailDBContext context) : base(context)
         {
         }
+        // TODO Remove unnecessary User.Email.ToLower() calls. Make sure that all ADD & UPDATE operations lower the User.Email.
 
         public User? GetById(int id) => context.Users.Find(id);
 
-        public User? GetByEmail(string email) => GetAll().FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+        public User? GetByEmail(string email) => GetAll().FirstOrDefault(u => u.Email == email);
 
-        public bool EmailExists(string email) => GetAll().Any(u => u.Email.ToLower() == email.ToLower());
+        public bool EmailExists(string email) => GetAll().Any(u => u.Email == email);
 
         public Response ValidateEmail(string email)
         {
@@ -46,6 +47,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
                 return Response.ErrorViolatesUniqueConstraint;
 
             user.Password = Password.Hash(user.Password);
+            user.Email = user.Email.ToLower();
 
             context.Users.Add(user);
             return SaveChanges();
@@ -68,7 +70,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             if (EmailExists(email))
                 return Response.ErrorViolatesUniqueConstraint;
 
-            toUpdate.Email = email;
+            toUpdate.Email = email.ToLower();
 
             return SaveChanges();
         }
