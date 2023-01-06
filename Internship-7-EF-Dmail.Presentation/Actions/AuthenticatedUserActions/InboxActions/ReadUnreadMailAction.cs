@@ -76,7 +76,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 return;
             }
 
-            WriteRecievedMail(selected!, _authenticatedUser);
+            WriteMail(selected!, _authenticatedUser);
             if(_mailStatus == MailStatus.Unread)
             {
                 _mailRepository.UpdateMailStatus(selected!.Id,

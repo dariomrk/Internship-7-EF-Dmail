@@ -24,4 +24,11 @@ Main focus on Entity Framework, Postgres, LINQ and design patterns.
 | `administrator@dmail.hr` | `administrator-password` |
 | `user@dmail.hr`          | `user-password`          |
 | `dario@dmail.hr`         | `password`               |
-  
+
+## Known limitations
+
+| Limitation                                                                  | Description                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~Some actions directly call `AuthAction.GetCurrentlyAuthenticatedUser()`~~ | ~~Some actions are not following the dependency injection pattern.~~                                                                                                                                            |
+| Exit to parent menu / app reload required to refresh UI.                    | Even if the database contains the recent changes, some actions *seem* to have failed in the user interface. A exit to the parent menu / reload of the application is needed to reflect those changes in the UI. |
+| Outbox mail deletion does not delete the mail.                              | Sent email / event deletion actually just hides the given mail from the senders outbox (*intended behaviour from my perspective*).                                                                              |

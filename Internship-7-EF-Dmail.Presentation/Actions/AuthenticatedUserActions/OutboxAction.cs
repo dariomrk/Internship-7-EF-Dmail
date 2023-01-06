@@ -26,9 +26,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
             WriteLine(Name);
 
             IList<Mail> sentMails = _mailRepository
-                .GetWhereSender(_authenticatedUser.Id)
+                .GetWhereSenderAndNotHidden(_authenticatedUser.Id)
                 .OrderByDescending(m => m.CreatedAt)
                 .ToList();
+
+            if (!sentMails.Any())
+            {
+                WriteLine(OTHER_NO_MAILS);
+                WaitForInput();
+                return;
+            }
 
             WriteSentMails(sentMails, _mailRepository);
 
@@ -37,8 +44,12 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
                 return;
             }
 
+            WriteMail(selected!, _authenticatedUser);
+            WriteLine("Selected mail actions are located on the next screen.");
+            WaitForInput();
+
             OutboxMenuFactory
-                .CreateActions()
+                .CreateActions(selected!)
                 .WriteActionsAndOpen();
         }
     }

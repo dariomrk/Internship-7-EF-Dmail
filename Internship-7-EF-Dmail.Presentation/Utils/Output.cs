@@ -168,7 +168,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             }
         }
 
-        public static void WriteRecievedMail(Mail mail, User sender)
+        public static void WriteMail(Mail mail, User sender)
         {
             Console.Clear();
             if (mail.Format == MailFormat.Email)

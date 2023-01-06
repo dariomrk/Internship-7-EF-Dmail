@@ -71,7 +71,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
                 return;
             }
 
-            WriteRecievedMail(selected!, _authenticatedUser);
+            WriteMail(selected!, _authenticatedUser);
             WriteLine("Selected mail actions are located on the next screen.");
             WaitForInput();
             SelectedMailMenuFactory.CreateActions(selected!).WriteActionsAndOpen();
