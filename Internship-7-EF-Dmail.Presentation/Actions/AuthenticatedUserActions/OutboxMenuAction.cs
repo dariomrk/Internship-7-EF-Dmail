@@ -39,7 +39,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 
             WriteSentMails(sentMails, _mailRepository);
 
-            if(!TrySelectMailByIndex(sentMails, out Mail? selected))
+            if (!TrySelectMailByIndex(sentMails, out Mail? selected))
             {
                 return;
             }

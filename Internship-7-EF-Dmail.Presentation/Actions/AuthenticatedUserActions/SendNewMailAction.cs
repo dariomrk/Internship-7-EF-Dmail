@@ -38,7 +38,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 
             IList<string>? userInput = ReadRecipients();
 
-            if(userInput == null)
+            if (userInput == null)
             {
                 WriteLine(ERROR_INVALID, Style.Error);
                 WaitForInput();
@@ -53,10 +53,11 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 
             List<User> recipientsUsers = new List<User>();
 
-            userInput.ForEach((ui) => {
+            userInput.ForEach((ui) =>
+            {
                 User toAdd = _userRepository.GetByEmail(ui);
 
-                if(toAdd != null && !recipientsUsers.Contains(toAdd))
+                if (toAdd != null && !recipientsUsers.Contains(toAdd))
                     recipientsUsers.Add(toAdd);
             });
 

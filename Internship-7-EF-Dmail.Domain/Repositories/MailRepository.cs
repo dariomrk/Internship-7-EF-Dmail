@@ -30,7 +30,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             .Join(GetWhereReciever(recipientId),
             s => s.Id,
             r => r.Id,
-            (s,r) => new {s,r})
+            (s, r) => new { s, r })
             .Select(a => a.r)
             .ToList();
 

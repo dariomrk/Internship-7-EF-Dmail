@@ -40,7 +40,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
         public Response MarkAsSpam(int userId, int userToFlag)
         {
 
-            if(SpamFlagExists(userId,userToFlag))
+            if (SpamFlagExists(userId, userToFlag))
             {
                 return Response.NoChanges;
             }

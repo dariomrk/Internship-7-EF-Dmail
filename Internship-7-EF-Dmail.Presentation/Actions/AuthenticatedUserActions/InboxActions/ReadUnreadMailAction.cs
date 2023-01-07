@@ -1,7 +1,6 @@
 ﻿using Internship_7_EF_Dmail.Data.Enums;
 using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Repositories;
-using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Factories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
@@ -77,7 +76,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             }
 
             WriteMail(selected!, _authenticatedUser);
-            if(_mailStatus == MailStatus.Unread)
+            if (_mailStatus == MailStatus.Unread)
             {
                 _mailRepository.UpdateMailStatus(selected!.Id,
                     _authenticatedUser.Id,

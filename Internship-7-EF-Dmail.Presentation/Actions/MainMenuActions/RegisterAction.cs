@@ -52,7 +52,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
             {
                 WriteLine("Having no password is a immense safety risk.\n" +
                     "Are you sure you want to continue?", Style.Warning);
-                if (!GetConfirmation("",false))
+                if (!GetConfirmation("", false))
                 {
                     WriteLine(OTHER_CANCELLED, Style.Emphasis);
                     WaitForInput();

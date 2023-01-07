@@ -1,6 +1,5 @@
 ﻿using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Repositories;
-using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Factories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
@@ -32,9 +31,9 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             string query = Read("Please enter the sender address (partial / full): ");
 
-            if(string.IsNullOrEmpty(query))
+            if (string.IsNullOrEmpty(query))
             {
-                WriteLine(ERROR_INVALID,Style.Error);
+                WriteLine(ERROR_INVALID, Style.Error);
                 WaitForInput();
                 return;
             }
@@ -65,8 +64,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             Console.Clear();
             WriteRecievedMails(final);
-            
-            if(!TrySelectMailByIndex(final, out Mail? selected))
+
+            if (!TrySelectMailByIndex(final, out Mail? selected))
             {
                 return;
             }

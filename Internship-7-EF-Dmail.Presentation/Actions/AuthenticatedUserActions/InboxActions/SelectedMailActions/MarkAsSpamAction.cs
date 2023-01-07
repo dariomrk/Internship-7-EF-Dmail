@@ -1,7 +1,6 @@
 ﻿using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Domain.Repositories;
-using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.InboxActions.SelectedMailActions

@@ -1,7 +1,6 @@
 ﻿using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Domain.Repositories;
-using Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.InboxActions.SelectedMailActions
@@ -32,7 +31,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             if (_selected.Format == Data.Enums.MailFormat.Event)
                 WriteLine("Deleting this event from the inbox will remove you from the list of invited users for everyone!", Style.Warning);
-            if (!GetConfirmation("Are you sure you want to delete this mail?",false))
+            if (!GetConfirmation("Are you sure you want to delete this mail?", false))
             {
                 WriteLine(OTHER_CANCELLED, Style.Emphasis);
                 WaitForInput();

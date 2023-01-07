@@ -1,5 +1,4 @@
 ﻿using Internship_7_EF_Dmail.Data.Models;
-using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Factories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
@@ -23,7 +22,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
             Console.Clear();
             WriteLine(Name);
 
-            if(_authenticatedUser.Rights != Data.Enums.UserRights.Elevated)
+            if (_authenticatedUser.Rights != Data.Enums.UserRights.Elevated)
             {
                 WriteLine("This menu is not available for your profile.", Style.Error);
                 WaitForInput();

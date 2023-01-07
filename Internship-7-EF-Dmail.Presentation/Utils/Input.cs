@@ -1,7 +1,5 @@
-﻿using Internship_7_EF_Dmail.Data.Enums;
-using Internship_7_EF_Dmail.Data.Models;
+﻿using Internship_7_EF_Dmail.Data.Models;
 using Internship_7_EF_Dmail.Presentation.Extensions;
-using static Internship_7_EF_Dmail.Presentation.Utils.Output;
 
 namespace Internship_7_EF_Dmail.Presentation.Utils
 {
@@ -224,9 +222,9 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static DateTime? ReadDateTime(string prompt)
         {
-            if(!DateTime.TryParse(Read(prompt), out DateTime dateTime))
+            if (!DateTime.TryParse(Read(prompt), out DateTime dateTime))
             {
-                WriteLine(ERROR_INVALID,Style.Error);
+                WriteLine(ERROR_INVALID, Style.Error);
                 WaitForInput();
                 return null;
             }

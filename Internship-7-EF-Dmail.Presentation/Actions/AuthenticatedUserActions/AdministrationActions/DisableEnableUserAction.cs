@@ -35,7 +35,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.Ad
                 .Where(u => u.Status != _userStatus && u.Email != _authenticatedUser.Email)
                 .ToList();
 
-            if(!users.Any())
+            if (!users.Any())
             {
                 WriteLine(ERROR_NO_MAILS_WITHIN_CRITERIA, Style.Error);
                 WaitForInput();
@@ -53,7 +53,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.Ad
                 return;
             }
 
-            if(!GetConfirmation($"Are you sure you want to change the user status to " +
+            if (!GetConfirmation($"Are you sure you want to change the user status to " +
                 $"{(_userStatus == UserStatus.Active ? "active" : "disabled")}?"))
             {
                 WriteLine(OTHER_CANCELLED, Style.Emphasis);

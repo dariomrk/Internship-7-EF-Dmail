@@ -1,5 +1,4 @@
-﻿using Internship_7_EF_Dmail.Data.Models;
-using Internship_7_EF_Dmail.Presentation.Extensions;
+﻿using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Factories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 

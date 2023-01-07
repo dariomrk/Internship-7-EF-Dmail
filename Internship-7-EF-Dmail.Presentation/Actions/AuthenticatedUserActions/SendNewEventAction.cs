@@ -3,7 +3,6 @@ using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Extensions;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
-using System;
 
 namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 {
@@ -54,7 +53,8 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 
             List<User> recipientsUsers = new List<User>();
 
-            userInput.ForEach((ui) => {
+            userInput.ForEach((ui) =>
+            {
                 User toAdd = _userRepository.GetByEmail(ui);
 
                 if (toAdd != null && !recipientsUsers.Contains(toAdd))
@@ -71,7 +71,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
             newMail.Title = ReadWithFallback(PROMPT_MAIL_TITLE, "No title");
             newMail.EventStartAt = ReadDateTime(PROMPT_DATETIME);
 
-            if(newMail.EventStartAt == null)
+            if (newMail.EventStartAt == null)
             {
                 return;
             }
