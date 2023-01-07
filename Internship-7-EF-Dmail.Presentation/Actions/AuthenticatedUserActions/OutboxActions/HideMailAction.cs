@@ -26,7 +26,11 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.Ou
             WriteLine(Name);
 
             if (_selected.Format == Data.Enums.MailFormat.Event)
+            {
                 WriteLine("Deleting this event from the outbox will not remove the event invitations you sent!", Style.Warning);
+                WriteLine("This operation will cancel the event!", Style.Warning);
+
+            }
             if (!GetConfirmation("Are you sure you want to delete this mail?", false))
             {
                 WriteLine(OTHER_CANCELLED, Style.Emphasis);

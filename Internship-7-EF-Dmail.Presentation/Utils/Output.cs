@@ -150,6 +150,12 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static void WriteInvitedUsers(Mail mail, string currentUser)
         {
+            if(mail.HiddenFromSender)
+            {
+                WriteLine("Event is cancelled.", Style.Emphasis);
+                return;
+            }
+
             WriteLine("Invited users:");
             foreach (Recipient recipient in mail.Recipients)
             {
