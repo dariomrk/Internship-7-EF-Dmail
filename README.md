@@ -68,6 +68,11 @@ class Recipient {
   EventStatus EventStatus?
 }
 
+class SpamFlag {
+    UserId int
+    FlaggedUserId int
+}
+
 class EventStatus{
     NoResponse
     Rejected
