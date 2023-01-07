@@ -27,7 +27,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
 
             IList<Mail> sentMails = _mailRepository
                 .GetWhereSenderAndNotHidden(_authenticatedUser.Id)
-                .OrderBy(m => m.CreatedAt) // TODO Fix, not getting sorted.
+                .OrderByDescending(m => m.CreatedAt)
                 .ToList();
 
             if (!sentMails.Any())

@@ -119,9 +119,9 @@ Recipient .. EventStatus
 | `user@dmail.hr`          | `user-password`          | Active | Standard |
 | `dario@dmail.hr`         | `password`               | Active | Standard |
 
-## Known limitations / bugs
+## Known limitations
 
-| Limitation / bug                                                             | Description                                                                                                                                                                                                    |
+| Limitation                                                                   | Description                                                                                                                                                                                                    |
 | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Exit to parent menu / app reload required to reflect database changes in UI. | Even if the database contains the recent changes, some changes *seem* to be missing in the user interface. A exit to the parent menu / reload of the application is needed to reflect those changes in the UI. |
 | Outbox mail deletion does not delete the mail.                               | Sent email / event deletion actually just hides the given mail from the senders outbox (*intended behavior from my perspective*).                                                                              |
@@ -133,4 +133,4 @@ Recipient .. EventStatus
 | :white_check_mark:   | Some actions directly call `AuthAction.GetCurrentlyAuthenticatedUser()`. | Some actions are not following the dependency injection pattern. Fix by removing `AuthAction.GetCurrentlyAuthenticatedUser()` calls from Actions. |
 | :white_large_square: | ~~Outbox event deletion does not cancel the event.~~                     | ~~Add `isCancelled` property to `Mail` entity.~~                                                                                                  |
 | :white_check_mark:   | Outbox event deletion does not cancel the event.                         | Use `Mail.HiddenFromSender` property to determine whether a event is cancelled.                                                                   |
-| :white_large_square: | Outbox mail not sorted correctly.                                        |                                                                                                                                                   |
+| :white_check_mark:   | Outbox mail not sorted correctly.                                        |                                                                                                                                                   |
