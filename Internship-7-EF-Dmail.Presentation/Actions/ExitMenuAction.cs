@@ -8,7 +8,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions
 
         public virtual string Name => "Exit";
 
-        public void Open()
+        public virtual void Open()
         {
         }
     }
