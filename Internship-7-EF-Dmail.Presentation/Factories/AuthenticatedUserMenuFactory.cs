@@ -14,7 +14,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
         {
             var actions = new List<IAction>()
             {
-                new LogoutAction(),
+                new LogoutAction(AuthAction.Logout),
 
                 new InboxMenuActions(),
 
