@@ -3,7 +3,7 @@ using Internship_7_EF_Dmail.Domain.Enums;
 using Internship_7_EF_Dmail.Domain.Repositories;
 using Internship_7_EF_Dmail.Presentation.Interfaces;
 
-namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.ProfileSettings
+namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.ProfileSettingsActions
 {
     public class RemoveSpamFlagAction : IAction
     {
@@ -33,14 +33,13 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.Pr
                 .GetFlaggedUsers(_authenticatedUser.Id)
                 .ToList();
 
-            if(!flaggedUsers.Any())
+            if (!flaggedUsers.Any())
             {
-                WriteLine("You have not flagged anyone as spam.",Style.Warning);
+                WriteLine("You have not flagged anyone as spam.", Style.Warning);
                 WaitForInput();
                 return;
             }
 
-            WriteLine("Ord. | User");
             for (int i = 0; i<flaggedUsers.Count; i++)
             {
                 User user = flaggedUsers[i];
@@ -50,7 +49,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.Pr
             if (!TrySelectUserByIndex(flaggedUsers, out User selected))
             {
                 return;
-            }    
+            }
 
             Response response = _spamFlagRepository.RemoveAsSpam(
                 _authenticatedUser.Id,

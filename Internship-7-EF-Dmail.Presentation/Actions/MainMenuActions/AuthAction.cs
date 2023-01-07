@@ -19,6 +19,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
             {
                 Id = _currentlyAuthenticatedUser.Id,
                 Email = _currentlyAuthenticatedUser.Email,
+                Rights = _currentlyAuthenticatedUser.Rights,
             };
         }
         private static void SetAuthenticatedUser(User user)
