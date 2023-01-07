@@ -108,11 +108,11 @@ Recipient .. EventStatus
 
 #### Login info
 
-| Username                 | Password                 |
-| ------------------------ | ------------------------ |
-| `administrator@dmail.hr` | `administrator-password` |
-| `user@dmail.hr`          | `user-password`          |
-| `dario@dmail.hr`         | `password`               |
+| Username                 | Password                 | Status | Rights   |
+| ------------------------ | ------------------------ | ------ | -------- |
+| `administrator@dmail.hr` | `administrator-password` | Active | Elevated |
+| `user@dmail.hr`          | `user-password`          | Active | Standard |
+| `dario@dmail.hr`         | `password`               | Active | Standard |
 
 ## Known limitations / bugs
 
