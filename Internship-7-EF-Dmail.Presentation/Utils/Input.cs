@@ -121,6 +121,33 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             return true;
         }
 
+        public static bool TrySelectUserByIndex(IList<User> users, out User? selected)
+        {
+            selected = null;
+
+            if (!users.Any())
+            {
+                WriteLine(OTHER_NO_MAILS, Style.Warning);
+                WaitForInput();
+                return false;
+            }
+
+            Write("Input the index of the mail you want to select or any other input to cancel: ");
+
+            if (!int.TryParse(Read(), out int userInput))
+            {
+                return false;
+            }
+
+            if (userInput < 0 || userInput > users.Count())
+            {
+                return false;
+            }
+
+            selected = users[userInput];
+            return true;
+        }
+
         public static IList<Mail> PromptFilterByFormat(ICollection<Mail> input)
         {
             Console.Clear();

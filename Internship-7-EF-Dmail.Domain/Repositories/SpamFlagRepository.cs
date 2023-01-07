@@ -54,12 +54,12 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             return base.SaveChanges();
         }
 
-        public Response RemoveAsSpam(int userId, int userToFlag)
+        public Response RemoveAsSpam(int userId, int userToUnflag)
         {
             context.SpamFlags.Remove(new SpamFlag()
             {
                 UserId = userId,
-                FlaggedUserId = userToFlag,
+                FlaggedUserId = userToUnflag,
             });
 
             return base.SaveChanges();
