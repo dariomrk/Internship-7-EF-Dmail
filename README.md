@@ -119,7 +119,7 @@ Recipient .. EventStatus
 | Limitation / bug                                                             | Description                                                                                                                                                                                                    |
 | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Exit to parent menu / app reload required to reflect database changes in UI. | Even if the database contains the recent changes, some changes *seem* to be missing in the user interface. A exit to the parent menu / reload of the application is needed to reflect those changes in the UI. |
-| Outbox mail deletion does not delete the mail.                               | Sent email / event deletion actually just hides the given mail from the senders outbox (*intended behaviour from my perspective*).                                                                             |
+| Outbox mail deletion does not delete the mail.                               | Sent email / event deletion actually just hides the given mail from the senders outbox (*intended behavior from my perspective*).                                                                              |
 
 ## ToDos
 
