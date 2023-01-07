@@ -27,7 +27,7 @@ Recipient
 SpamFlag
 
 
-User ||--o{ Mail : sends
+User ||--|{ Mail : sends
 User }|--|{ SpamFlag : has
 Mail ||--|{ Recipient : has
 Recipient ||--|{ User : is
@@ -114,23 +114,25 @@ Recipient .. EventStatus
 #### Login info
 
 | Username                 | Password                 | Status | Rights   |
-| ------------------------ | ------------------------ | ------ | -------- |
+| ------------------------ | ------------------------ |:------ | -------- |
 | `administrator@dmail.hr` | `administrator-password` | Active | Elevated |
 | `user@dmail.hr`          | `user-password`          | Active | Standard |
 | `dario@dmail.hr`         | `password`               | Active | Standard |
 
-## Known limitations
+## Other
+
+### Known limitations
 
 | Limitation                                                                   | Description                                                                                                                                                                                                    |
 | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Exit to parent menu / app reload required to reflect database changes in UI. | Even if the database contains the recent changes, some changes *seem* to be missing in the user interface. A exit to the parent menu / reload of the application is needed to reflect those changes in the UI. |
-| Outbox mail deletion does not delete the mail.                               | Sent email / event deletion actually just hides the given mail from the senders outbox (*intended behavior from my perspective*).                                                                              |
 
-## ToDos
+### ToDos
 
-| Status               | Title                                                                    | Description                                                                                                                                       |
-| -------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| :white_check_mark:   | Some actions directly call `AuthAction.GetCurrentlyAuthenticatedUser()`. | Some actions are not following the dependency injection pattern. Fix by removing `AuthAction.GetCurrentlyAuthenticatedUser()` calls from Actions. |
-| :white_large_square: | ~~Outbox event deletion does not cancel the event.~~                     | ~~Add `isCancelled` property to `Mail` entity.~~                                                                                                  |
-| :white_check_mark:   | Outbox event deletion does not cancel the event.                         | Use `Mail.HiddenFromSender` property to determine whether a event is cancelled.                                                                   |
-| :white_check_mark:   | Outbox mail not sorted correctly.                                        |                                                                                                                                                   |
+| Status               | Title                                                                       | Description                                                                                                                                       |
+|:--------------------:| --------------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :white_check_mark:   | Some actions directly call `AuthAction.GetCurrentlyAuthenticatedUser()`.    | Some actions are not following the dependency injection pattern. Fix by removing `AuthAction.GetCurrentlyAuthenticatedUser()` calls from Actions. |
+| :white_large_square: | ~~Outbox event deletion does not cancel the event.~~                        | ~~Add `isCancelled` property to `Mail` entity.~~                                                                                                  |
+| :white_check_mark:   | Outbox event deletion does not cancel the event.                            | Use `Mail.HiddenFromSender` property to determine whether a event is cancelled.                                                                   |
+| :white_check_mark:   | Outbox mail not sorted correctly.                                           |                                                                                                                                                   |
+| :white_large_square: | Deleting mail from inbox results in removal from the mails recipients list. | Add MailStatus `Deleted` and stop deleting `Recipient` entry on mail deletion.                                                                    |
