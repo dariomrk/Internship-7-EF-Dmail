@@ -39,7 +39,7 @@ namespace Internship_7_EF_Dmail.Data.Seeds
                         CreatedAt = DateTime.UtcNow,
                         Status = Enums.UserStatus.Active,
                         Rights = Enums.UserRights.Standard,
-                    },
+                    }
                 });
 
             modelBuilder.Entity<Mail>()
@@ -50,7 +50,7 @@ namespace Internship_7_EF_Dmail.Data.Seeds
                         Id = 1,
                         SenderId = 1,
                         Title = "First sample mail",
-                        CreatedAt = DateTime.UtcNow.AddSeconds(-1),
+                        CreatedAt = DateTime.UtcNow.AddHours(-1),
                         Format = Enums.MailFormat.Email,
                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
                     },
@@ -58,12 +58,30 @@ namespace Internship_7_EF_Dmail.Data.Seeds
                     {
                         Id = 2,
                         SenderId = 2,
-                        Title = "Testing DMail",
-                        CreatedAt = DateTime.UtcNow,
+                        Title = "Testing DMail Events",
+                        CreatedAt = DateTime.UtcNow.AddMinutes(-10),
                         Format = Enums.MailFormat.Event,
                         EventStartAt = DateTime.UtcNow.AddMinutes(1),
                         EventDuration = TimeSpan.FromMinutes(1),
                     },
+                    new Mail()
+                    {
+                        Id = 3,
+                        SenderId = 1,
+                        Title = "Hello there",
+                        CreatedAt = DateTime.UtcNow.AddSeconds(-1),
+                        Format = Enums.MailFormat.Email,
+                        Content = "Hello world from the admin.",
+                    },
+                    new Mail()
+                    {
+                        Id = 4,
+                        SenderId = 1,
+                        Title = "Hello there again",
+                        CreatedAt = DateTime.UtcNow,
+                        Format = Enums.MailFormat.Email,
+                        Content = "This one should arrive a bit later.",
+                    }
                 });
 
             modelBuilder.Entity<Recipient>()
@@ -91,6 +109,16 @@ namespace Internship_7_EF_Dmail.Data.Seeds
                         UserId = 3,
                         EventStatus = Enums.EventStatus.NoResponse,
                     },
+                    new Recipient()
+                    {
+                        MailId = 3,
+                        UserId = 3,
+                    },
+                    new Recipient()
+                    {
+                        MailId = 4,
+                        UserId = 3,
+                    }
                 });
 
             modelBuilder.Entity<SpamFlag>()
