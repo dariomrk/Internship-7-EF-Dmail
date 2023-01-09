@@ -3,6 +3,7 @@
     public enum MailStatus
     {
         Unread,
-        Read
+        Read,
+        Deleted
     }
 }

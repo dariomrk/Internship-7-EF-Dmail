@@ -26,14 +26,6 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             .Where(m => m.SenderId == senderId && !m.HiddenFromSender)
             .ToList();
 
-        public ICollection<Mail> GetWhereSenderAndRecipient(int senderId, int recipientId) => GetWhereSender(senderId)
-            .Join(GetWhereReciever(recipientId),
-            s => s.Id,
-            r => r.Id,
-            (s, r) => new { s, r })
-            .Select(a => a.r)
-            .ToList();
-
         public ICollection<Mail> GetWhereReciever(int recieverId) => GetAll()
             .Join(context.Recipients,
             m => m.Id,
@@ -42,6 +34,25 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             .Where(a => a.r.UserId == recieverId)
             .Select(a => a.m)
             .ToList();
+
+        public ICollection<Mail> GetWhereRecieverAndNotDeleted(int recieverId) => GetAll()
+            .Join(context.Recipients,
+            m => m.Id,
+            r => r.MailId,
+            (m, r) => new { m, r })
+            .Where(a => a.r.UserId == recieverId && a.r.MailStatus != MailStatus.Deleted)
+            .Select(a => a.m)
+            .ToList();
+
+        public ICollection<Mail> GetWhereSenderAndRecipient(int senderId, int recipientId) => GetWhereSender(senderId)
+            .Join(GetWhereRecieverAndNotDeleted(recipientId),
+            s => s.Id,
+            r => r.Id,
+            (s, r) => new { s, r })
+            .Select(a => a.r)
+            .ToList();
+
+        
 
         public ICollection<Mail> GetWhereRecieverAndStatus(int recieverId, MailStatus status) => GetAll()
             .Join(context.Recipients,
@@ -135,7 +146,7 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
             Recipient recipient = context.Recipients.Find(mailId, userId)!;
 
-            context.Recipients.Remove(recipient);
+            recipient.MailStatus = MailStatus.Deleted;
 
             return SaveChanges();
         }

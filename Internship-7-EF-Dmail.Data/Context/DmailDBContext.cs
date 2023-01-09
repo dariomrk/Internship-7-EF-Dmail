@@ -86,6 +86,7 @@ namespace Internship_7_EF_Dmail.Data.Context
             recipientEntity.HasKey(r => new { r.MailId, r.UserId });
 
             recipientEntity.Property(r => r.MailStatus)
+                .IsRequired()
                 .HasDefaultValue(MailStatus.Unread);
 
             #endregion
