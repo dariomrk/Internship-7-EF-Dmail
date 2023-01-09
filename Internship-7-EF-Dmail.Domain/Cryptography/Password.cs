@@ -2,7 +2,7 @@
 
 namespace Internship_7_EF_Dmail.Domain.Cryptography
 {
-    static public class Password
+    public static class Password
     {
         private const byte _saltSize = 16;
         private const byte _keySize = 32;
@@ -36,7 +36,7 @@ namespace Internship_7_EF_Dmail.Domain.Cryptography
             byte[] salt = Convert.FromHexString(segments[1]);
             int iterations = int.Parse(segments[2]);
 
-            HashAlgorithmName algorithm = new HashAlgorithmName(segments[3]);
+            HashAlgorithmName algorithm = new(segments[3]);
 
             byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(
                 input,

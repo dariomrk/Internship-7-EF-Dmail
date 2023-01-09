@@ -15,7 +15,10 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
         protected Response SaveChanges()
         {
             if (context.SaveChanges() > 0)
+            {
                 return Response.Succeeded;
+            }
+
             return Response.NoChanges;
         }
     }

@@ -28,14 +28,17 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             string password = "";
             while (true)
             {
-                var key = Console.ReadKey(true);
+                ConsoleKeyInfo key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Backspace || key.Key == ConsoleKey.Delete)
                 {
                     password = password.Truncate(password.Length-1);
                     continue;
                 }
                 if (key.Key == ConsoleKey.Enter)
+                {
                     break;
+                }
+
                 password += key.KeyChar;
             }
             Console.WriteLine();
@@ -47,16 +50,27 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             while (true)
             {
                 if (clear)
+                {
                     Console.Clear();
+                }
+
                 if (!string.IsNullOrEmpty(message))
+                {
                     WriteLine(message);
+                }
+
                 Write(PROMPT_CONFIRMATION_Y_N);
                 string input = Read().ToLower();
 
                 if (input == "y" || input == "yes")
+                {
                     return true;
+                }
+
                 if (input == "n" || input == "no")
+                {
                     return false;
+                }
 
                 WriteLine(ERROR_INVALID, Style.Error);
                 WaitForInput();
@@ -88,7 +102,10 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             string input = Read("Re-type the captcha: ");
 
             if (output == input)
+            {
                 return true;
+            }
+
             return false;
         }
 
@@ -155,7 +172,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 return input.ToList();
             }
 
-            List<string> options = new List<string>()
+            List<string> options = new()
             {
                 "Emails only",
                 "Events only",
@@ -173,7 +190,10 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             while (true)
             {
                 if (!string.IsNullOrEmpty(message))
+                {
                     WriteLine(message);
+                }
+
                 options.ForEach((option, i) => WriteLine($"{i} - {option}"));
                 Write(PROMPT_SELECT_OPTION);
 
@@ -199,7 +219,10 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             string input = Read(prompt);
 
             if (string.IsNullOrWhiteSpace(input))
+            {
                 return fallbackValue;
+            }
+
             return input;
         }
 
@@ -215,7 +238,9 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
             IList<string> userInputSplit = userInput.Split(',').ToList();
 
             for (int i = 0; i<userInputSplit.Count; i++)
+            {
                 userInputSplit[i] = userInputSplit[i].ToLower().Trim();
+            }
 
             return userInputSplit;
         }

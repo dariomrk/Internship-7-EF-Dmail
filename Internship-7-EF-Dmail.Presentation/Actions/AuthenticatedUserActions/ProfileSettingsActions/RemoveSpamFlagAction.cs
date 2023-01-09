@@ -43,7 +43,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.Pr
             for (int i = 0; i<flaggedUsers.Count; i++)
             {
                 User user = flaggedUsers[i];
-                WriteLine($"{i.ToString().PadRight(4)} | {user.Email}");
+                WriteLine($"{i,-4} | {user.Email}");
             }
 
             if (!TrySelectUserByIndex(flaggedUsers, out User selected))

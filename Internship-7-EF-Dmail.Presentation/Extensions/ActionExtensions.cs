@@ -33,7 +33,7 @@ namespace Internship_7_EF_Dmail.Presentation.Extensions
                     continue;
                 }
 
-                var selectedAction = actions.FirstOrDefault(a => a.Index == userInput);
+                IAction? selectedAction = actions.FirstOrDefault(a => a.Index == userInput);
 
                 if (selectedAction == null)
                 {

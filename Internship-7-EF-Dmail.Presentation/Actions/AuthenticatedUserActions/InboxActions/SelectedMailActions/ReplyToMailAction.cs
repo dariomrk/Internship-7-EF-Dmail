@@ -29,7 +29,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             Console.Clear();
             WriteLine(Name);
 
-            Mail newMail = new Mail()
+            Mail newMail = new()
             {
                 SenderId = _authenticatedUser.Id,
                 Format = Data.Enums.MailFormat.Email,

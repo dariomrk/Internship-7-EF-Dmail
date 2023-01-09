@@ -45,7 +45,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.Ad
             for (int i = 0; i<users.Count; i++)
             {
                 User user = users[i];
-                WriteLine($"{i.ToString().PadRight(4)} | {user.Email}");
+                WriteLine($"{i,-4} | {user.Email}");
             }
 
             if (!TrySelectUserByIndex(users, out User selected))

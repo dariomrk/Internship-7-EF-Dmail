@@ -14,22 +14,39 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
         }
         // TODO Remove unnecessary User.Email.ToLower() calls. Make sure that all ADD & UPDATE operations lower the User.Email.
 
-        public User? GetById(int id) => context.Users.Find(id);
+        public User? GetById(int id)
+        {
+            return context.Users.Find(id);
+        }
 
-        public User? GetByEmail(string email) => GetAll().FirstOrDefault(u => u.Email == email);
+        public User? GetByEmail(string email)
+        {
+            return GetAll().FirstOrDefault(u => u.Email == email);
+        }
 
-        public bool EmailExists(string email) => GetAll().Any(u => u.Email == email);
+        public bool EmailExists(string email)
+        {
+            return GetAll().Any(u => u.Email == email);
+        }
 
         public Response ValidateEmail(string email)
         {
             if (!Regex.IsMatch(email, "^([a-z A-Z 0-9 .]{1,})+@([a-z A-Z 0-9]{3,})+.+[a-z A-z]{2,}$"))
+            {
                 return Response.ErrorInvalidFormat;
+            }
+
             return Response.Succeeded;
         }
 
-        public ICollection<User> GetAll() => context.Users.ToList();
+        public ICollection<User> GetAll()
+        {
+            return context.Users.ToList();
+        }
 
-        public ICollection<User> GetFlaggedUsers(int userId) => context.SpamFlags
+        public ICollection<User> GetFlaggedUsers(int userId)
+        {
+            return context.SpamFlags
                 .Where(sf => sf.UserId == userId)
                 .Join(context.Users,
                 sf => sf.FlaggedUserId,
@@ -37,14 +54,19 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
                 (sf, u) => new { sf, u })
                 .Select(a => a.u)
                 .ToList();
+        }
 
         public Response Add(User user)
         {
             if (ValidateEmail(user.Email) != Response.Succeeded)
+            {
                 return Response.ErrorViolatesRequirements;
+            }
 
             if (EmailExists(user.Email))
+            {
                 return Response.ErrorViolatesUniqueConstraint;
+            }
 
             user.Password = Password.Hash(user.Password);
             user.Email = user.Email.ToLower();
@@ -63,12 +85,19 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             User? toUpdate = GetById(userId);
 
             if (toUpdate == null)
+            {
                 return Response.ErrorNotFound;
+            }
+
             if (ValidateEmail(email) != Response.Succeeded)
+            {
                 return Response.ErrorViolatesRequirements;
+            }
 
             if (EmailExists(email))
+            {
                 return Response.ErrorViolatesUniqueConstraint;
+            }
 
             toUpdate.Email = email.ToLower();
 
@@ -80,7 +109,9 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             User? toUpdate = GetById(userId);
 
             if (toUpdate == null)
+            {
                 return Response.ErrorNotFound;
+            }
 
             toUpdate.Password = Cryptography.Password.Hash(password);
 
@@ -92,7 +123,9 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             User? toUpdate = GetById(userId);
 
             if (toUpdate == null)
+            {
                 return Response.ErrorNotFound;
+            }
 
             toUpdate.Status = status;
 
@@ -104,7 +137,9 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             User? toUpdate = GetById(userId);
 
             if (toUpdate == null)
+            {
                 return Response.ErrorNotFound;
+            }
 
             toUpdate.Rights = rights;
 
@@ -116,7 +151,9 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             User? toDelete = GetById(userId);
 
             if (toDelete == null)
+            {
                 return Response.ErrorNotFound;
+            }
 
             context.Users.Remove(toDelete);
             return SaveChanges();
@@ -127,10 +164,15 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             User? toCheck = GetByEmail(email);
 
             if (toCheck == null)
+            {
                 return false;
+            }
 
             if (toCheck.Status == Data.Enums.UserStatus.Active)
+            {
                 return true;
+            }
+
             return false;
         }
 
@@ -139,13 +181,19 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             User? toAuth = context.Users.FirstOrDefault(u => u.Email == email);
 
             if (toAuth == null)
+            {
                 return Response.ErrorNotFound;
+            }
 
             if (toAuth.Status == Data.Enums.UserStatus.Disabled)
+            {
                 return Response.ErrorAccoundDisabled;
+            }
 
             if ((DateTime.UtcNow - toAuth.LastFailedLogin) < TimeSpan.FromSeconds(30))
+            {
                 return Response.ErrorViolatesRequirements;
+            }
 
             if (!Password.Verify(password, toAuth.Password))
             {
@@ -157,8 +205,11 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
 
         }
 
-        public ICollection<User> GetEmailContains(string query) => GetAll()
+        public ICollection<User> GetEmailContains(string query)
+        {
+            return GetAll()
             .Where(u => u.Email.Contains(query))
             .ToList();
+        }
     }
 }

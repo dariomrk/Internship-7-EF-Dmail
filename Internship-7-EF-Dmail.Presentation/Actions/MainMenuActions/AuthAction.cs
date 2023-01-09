@@ -10,11 +10,18 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
     public class AuthAction : IAction
     {
         private static User? _currentlyAuthenticatedUser = null;
-        public static void Logout() => _currentlyAuthenticatedUser = null;
+        public static void Logout()
+        {
+            _currentlyAuthenticatedUser = null;
+        }
+
         public static User? GetCurrentlyAuthenticatedUser()
         {
             if (_currentlyAuthenticatedUser == null)
+            {
                 return null;
+            }
+
             return new User
             {
                 Id = _currentlyAuthenticatedUser.Id,

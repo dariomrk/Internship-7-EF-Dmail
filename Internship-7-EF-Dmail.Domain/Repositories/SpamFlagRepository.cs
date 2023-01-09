@@ -10,7 +10,10 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
         public SpamFlagRepository(DmailDBContext context) : base(context)
         {
         }
-        public ICollection<SpamFlag> GetAll() => context.SpamFlags.ToList();
+        public ICollection<SpamFlag> GetAll()
+        {
+            return context.SpamFlags.ToList();
+        }
 
         public SpamFlag? GetById(int id)
         {
@@ -65,9 +68,11 @@ namespace Internship_7_EF_Dmail.Domain.Repositories
             return base.SaveChanges();
         }
 
-        public ICollection<SpamFlag> GetSpamFlagsForUser(int userId) => GetAll()
+        public ICollection<SpamFlag> GetSpamFlagsForUser(int userId)
+        {
+            return GetAll()
             .Where(sf => sf.UserId == userId)
             .ToList();
-
+        }
     }
 }

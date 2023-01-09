@@ -99,7 +99,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static void Write(string message, Style writeStyle = Style.Standard)
         {
-            var style = GetStyleSettings(writeStyle);
+            StyleSettings style = GetStyleSettings(writeStyle);
 
             Console.ForegroundColor = style.Foreground;
             Console.BackgroundColor = style.Background;
@@ -109,7 +109,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
 
         public static void WriteLine(string message = "", Style writeStyle = Style.Standard)
         {
-            var style = GetStyleSettings(writeStyle);
+            StyleSettings style = GetStyleSettings(writeStyle);
 
             Console.ForegroundColor = style.Foreground;
             Console.BackgroundColor = style.Background;
@@ -121,19 +121,25 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         {
             WriteLine("Ord. | Title                                            | Sender");
             if (!mails.Any())
+            {
                 return;
+            }
+
             mails.ForEach((m, i) => WriteLine($"{i}    |" +
-                $" {m.Title.Truncate(48).PadRight(48)} |" +
-                $" {m.Sender.Email.Truncate(24).PadRight(24)}"));
+                $" {m.Title.Truncate(48),-48} |" +
+                $" {m.Sender.Email.Truncate(24),-24}"));
         }
 
         public static void WriteSentMails(IList<Mail> mails, MailRepository mailRepository)
         {
             WriteLine("Ord. | Title                                            | Recipient");
             if (!mails.Any())
+            {
                 return;
+            }
+
             mails.ForEach((m, i) => WriteLine($"{i}    |" +
-                $" {m.Title.Truncate(48).PadRight(48)} | " +
+                $" {m.Title.Truncate(48),-48} | " +
                 GetRecipientsEmails(mailRepository
                 .GetRecipients(m.Id)
                 .Select(m => m.Email)
@@ -143,7 +149,10 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
         public static string GetRecipientsEmails(IList<string> recipients)
         {
             if (recipients.Count > 1)
+            {
                 return "multiple recipients";
+            }
+
             return recipients.FirstOrDefault("no recipients");
         }
 
@@ -165,11 +174,22 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                     Write(" : ");
                 }
                 else
+                {
                     Write($" |> {recipient.User.Email} : ");
+                }
 
-                if (recipient.EventStatus == EventStatus.NoResponse) WriteLine("no response");
-                else if (recipient.EventStatus == EventStatus.Accepted) WriteLine("accepted", Style.Positive);
-                else if (recipient.EventStatus == EventStatus.Rejected) WriteLine("rejected", Style.Negative);
+                switch (recipient.EventStatus)
+                {
+                    case EventStatus.NoResponse:
+                        WriteLine("no response");
+                        break;
+                    case EventStatus.Accepted:
+                        WriteLine("accepted", Style.Positive);
+                        break;
+                    case EventStatus.Rejected:
+                        WriteLine("rejected", Style.Negative);
+                        break;
+                }
             }
         }
 
@@ -192,7 +212,7 @@ namespace Internship_7_EF_Dmail.Presentation.Utils
                 WriteLine(
                     $"Title:            {mail.Title}\n" +
                     $"Event start time: {mail.EventStartAt}\n" +
-                    $"Event duration:   {mail.EventDuration!.Value.ToString(@"hh\:mm\:ss")}\n" +
+                    $"Event duration:   {mail.EventDuration!.Value:hh\\:mm\\:ss}\n" +
                     $"Sender:           {mail.Sender.Email}");
                 WriteInvitedUsers(mail,
                     sender.Email);

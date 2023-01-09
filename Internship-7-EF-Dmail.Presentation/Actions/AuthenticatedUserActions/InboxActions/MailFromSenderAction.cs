@@ -40,7 +40,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
 
             ICollection<User> senders = _userRepository.GetEmailContains(query);
 
-            List<Mail> mailsWhereSender = new List<Mail>();
+            List<Mail> mailsWhereSender = new();
 
             senders.ForEach<User>((u) =>
             {

@@ -30,7 +30,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
             Console.Clear();
             WriteLine(Name);
 
-            Mail newMail = new Mail()
+            Mail newMail = new()
             {
                 SenderId = _authenticatedUser.Id,
                 Format = Data.Enums.MailFormat.Email,
@@ -51,14 +51,16 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions
                 userInput.Remove(_authenticatedUser.Email);
             }
 
-            List<User> recipientsUsers = new List<User>();
+            List<User> recipientsUsers = new();
 
             userInput.ForEach((ui) =>
             {
                 User toAdd = _userRepository.GetByEmail(ui);
 
                 if (toAdd != null && !recipientsUsers.Contains(toAdd))
+                {
                     recipientsUsers.Add(toAdd);
+                }
             });
 
             if (!recipientsUsers.Any())

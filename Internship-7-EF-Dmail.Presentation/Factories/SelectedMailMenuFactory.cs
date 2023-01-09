@@ -13,7 +13,7 @@ namespace Internship_7_EF_Dmail.Presentation.Factories
     {
         public static IList<IAction> CreateActions(Mail selected)
         {
-            var actions = new List<IAction>()
+            List<IAction> actions = new()
             {
                 new ExitMenuAction(),
 

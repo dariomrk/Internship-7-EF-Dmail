@@ -100,16 +100,16 @@ namespace Internship_7_EF_Dmail.Data.Context
     {
         public DmailDBContext CreateDbContext(string[] args)
         {
-            var config = new ConfigurationBuilder()
+            IConfigurationRoot config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddXmlFile("App.config")
                 .Build();
 
             config.Providers
                 .First()
-                .TryGet("connectionStrings:add:DmailApp:connectionString", out var connectionString);
+                .TryGet("connectionStrings:add:DmailApp:connectionString", out string? connectionString);
 
-            var options = new DbContextOptionsBuilder<DmailDBContext>()
+            DbContextOptions<DmailDBContext> options = new DbContextOptionsBuilder<DmailDBContext>()
                 .UseNpgsql(connectionString)
                 .Options;
 

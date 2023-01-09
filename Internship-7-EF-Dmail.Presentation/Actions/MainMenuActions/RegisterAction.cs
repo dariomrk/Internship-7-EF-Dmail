@@ -78,7 +78,7 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.MainMenuActions
 
             Console.Clear();
 
-            User user = new User()
+            User user = new()
             {
                 Email = email,
                 Password = password,

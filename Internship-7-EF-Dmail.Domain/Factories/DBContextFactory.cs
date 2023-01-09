@@ -8,7 +8,7 @@ namespace Internship_7_EF_Dmail.Domain.Factories
     {
         public static DmailDBContext CreateDBContext()
         {
-            var options = new DbContextOptionsBuilder()
+            DbContextOptions options = new DbContextOptionsBuilder()
                 .UseNpgsql(ConfigurationManager.ConnectionStrings["DmailApp"].ConnectionString)
                 .Options;
 

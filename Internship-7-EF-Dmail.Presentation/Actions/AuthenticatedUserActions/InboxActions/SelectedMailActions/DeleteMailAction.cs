@@ -30,7 +30,10 @@ namespace Internship_7_EF_Dmail.Presentation.Actions.AuthenticatedUserActions.In
             WriteLine(Name);
 
             if (_selected.Format == Data.Enums.MailFormat.Event)
+            {
                 WriteLine("Deleting this event from the inbox will remove you from the list of invited users for everyone!", Style.Warning);
+            }
+
             if (!GetConfirmation("Are you sure you want to delete this mail?", false))
             {
                 WriteLine(OTHER_CANCELLED, Style.Emphasis);
